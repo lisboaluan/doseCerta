@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/logo"/>
+
+    <EditText
+        android:id="@+id/editNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:background="@color/light_grey"
+        android:maxLines="1"
+        android:inputType="text"
+        android:gravity="left"
+        android:padding="14dp"
+        android:drawableEnd="@drawable/ic_email"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginEnd="65dp"
+        />
+
+    <EditText
+        android:id="@+id/editSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:background="@color/light_grey"
+        android:maxLines="1"
+        android:inputType="numberPassword"
+        android:gravity="left"
+        android:padding="14dp"
+        android:drawableEnd="@drawable/ic_padlock"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginEnd="65dp"
+       />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LOGIN"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:cornerRadius="14dp"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginEnd="135dp"
+        android:layout_marginBottom="20dp"
+        />
+    
+    <TextView
+        android:id="@+id/txtCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Não tem uma conta?"
+        android:textSize="20dp"
+        style="@style/NoUnderlineEditText"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+
+    <Button
+        android:id="@+id/btnCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastre-se"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:cornerRadius="14dp"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="20dp"
+        />
+    
+
+</LinearLayout>
+</ScrollView>
