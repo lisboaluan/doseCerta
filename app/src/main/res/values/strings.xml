@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">doseCerta</string>
+
+    <!-- Tela de cadastro de usuário-->
+    <string name="hint_nome">Seu Nome</string>
+    <string name="hint_dtNascimento">Data de Nascimento</string>
+    <string name="hint_genero">Seu Gênero</string>
+    <string name="txt_criarConta">Criar uma Conta</string>
+    <string name="btn_cadastrar">CADASTRAR</string>
+    <string name="txt_possui_conta">Ja possui uma conta?</string>
+
+    <!-- Tela de login -->
+    <string name="btn_entrar">ENTRAR</string>
+    <string name="txt_nao_possui_conta">Não possui uma conta?</string>
+    <string name="btn_cadastre_se">Cadastre-se</string>
+
+
+    <!-- Tela de login e cadastro de usuário -->
+    <string name="hint_email">Email</string>
+    <string name="hint_senha">Senha</string>
 </resources>

@@ -13,19 +13,13 @@
         android:theme="@style/Theme.DoseCerta"
         tools:targetApi="31">
         <activity
-            android:name=".view.Cadastro"
+            android:name=".view.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".view.FormLogin"
+            android:name=".view.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".view.FormCadastro"
-            android:exported="false" />
-        <activity
-            android:name=".view.Home"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".view.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
