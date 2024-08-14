@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/tratamentoFragment">
+
+    <fragment
+        android:id="@+id/tratamentoFragment"
+        android:name="com.luanlisboa.dosecerta.TratamentoFragment"
+        android:label="fragment_tratamento"
+        tools:layout="@layout/fragment_tratamento" />
+    <fragment
+        android:id="@+id/relatorioFragment"
+        android:name="com.luanlisboa.dosecerta.RelatorioFragment"
+        android:label="fragment_relatorio"
+        tools:layout="@layout/fragment_relatorio" />
+    <fragment
+        android:id="@+id/anotacaoFragment"
+        android:name="com.luanlisboa.dosecerta.AnotacaoFragment"
+        android:label="fragment_anotacao"
+        tools:layout="@layout/fragment_anotacao" />
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.luanlisboa.dosecerta.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+</navigation>

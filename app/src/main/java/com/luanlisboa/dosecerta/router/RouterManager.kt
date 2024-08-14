@@ -2,6 +2,7 @@ package com.luanlisboa.dosecerta.router
 
 import android.content.Context
 import android.content.Intent
+import com.luanlisboa.dosecerta.view.CadastroMedicamentoActivity
 import com.luanlisboa.dosecerta.view.SignupActivity
 import com.luanlisboa.dosecerta.view.LoginActivity
 import com.luanlisboa.dosecerta.view.HomeActivity
@@ -10,7 +11,8 @@ import com.luanlisboa.dosecerta.view.HomeActivity
 
 object RouterManager {
 
-        fun direcionarParaCadastro(context: Context){
+
+    fun direcionarParaCadastro(context: Context){
         val intent = Intent(context, SignupActivity::class.java)
         context.startActivity(intent)
     }
@@ -24,5 +26,10 @@ object RouterManager {
         val intent = Intent(context, HomeActivity::class.java)
         context.startActivity(intent)
     }
+    fun direcionarParaCadastroMedicamento(context: Context) {
+        val intent = Intent(context, CadastroMedicamentoActivity::class.java)
+        context.startActivity(intent)
+    }
+
 }
 
