@@ -9,14 +9,14 @@ import com.luanlisboa.dosecerta.router.RouterManager
 import com.luanlisboa.dosecerta.utils.SnackbarUtils
 
 class LoginActivity : AppCompatActivity() {
-
+    /*
     private val bancoDados by lazy {
         DatabaseHelper(this)
     }
 
     private val binding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
-    }
+    } */
 
     private lateinit var binding: ActivityLoginBinding
 
@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView( binding.root )
-
+        /*
         // Banco de Dados (Não finalizado)
 
         with(binding){
@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-        //
+        // */
 
 
         supportActionBar?.hide()
