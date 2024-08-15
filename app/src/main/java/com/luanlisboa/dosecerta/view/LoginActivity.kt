@@ -1,3 +1,4 @@
+
 package com.luanlisboa.dosecerta.view
 
 import android.os.Bundle
@@ -63,12 +64,12 @@ class LoginActivity : AppCompatActivity() {
                 email.isEmpty() -> {
                     SnackbarUtils.mensagem(it,"Insira o seu email!")
                 }senha.isEmpty() -> {
-                    SnackbarUtils.mensagem(it,"Insira a sua senha!")
-                }senha.length <= 7 -> {
-                    SnackbarUtils.mensagem(it,"A senha precisa ter pelo menos 8 caracteres")
-                }else -> {
-                    RouterManager.direcionarParaHome(this)
-                }
+                SnackbarUtils.mensagem(it,"Insira a sua senha!")
+            }senha.length <= 7 -> {
+                SnackbarUtils.mensagem(it,"A senha precisa ter pelo menos 8 caracteres")
+            }else -> {
+                RouterManager.direcionarParaHome(this)
+            }
             }
         }
 

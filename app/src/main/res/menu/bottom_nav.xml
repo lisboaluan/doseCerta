@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_tratamento"
+        android:title="@string/menu_btn_bar_tratamento"
+        android:icon="@drawable/ic_tratamento_icon"/>
+
+    <item
+        android:id="@+id/menu_relatorio"
+        android:title="@string/menu_btn_bar_relatorio"
+        android:icon="@drawable/ic_relatorio_icon"/>
+
+    <item
+        android:id="@+id/menu_anotacao"
+        android:title="@string/menu_btn_bar_anotacao"
+        android:icon="@drawable/ic_anotacao_icon"/>
+
+    <item
+        android:id="@+id/menu_perfil"
+        android:title="@string/menu_btn_bar_perfil"
+        android:icon="@drawable/ic_perfil_icon"/>
+
+</menu>
