@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unidadeMedida">
+        <item>gotas</item>
+        <item>mg</item>
+        <item>ml</item>
+    </string-array>
+
+    <string-array name="formato">
+        <item>Selecione o formato</item> <!-- Item placeholder -->
+        <item>Cápsula(s)</item>
+        <item>Comprimido(s)</item>
+        <item>Drágea(s)</item>
+        <item>Xarope(s)</item>
+    </string-array>
+</resources>

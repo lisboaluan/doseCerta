@@ -9,7 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
         <FrameLayout
             android:id="@+id/frame_layout"
@@ -46,19 +47,18 @@
             android:id="@+id/btnCadastrarTratamento"
             android:layout_width="235dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/blue"
-            app:cornerRadius="14dp"
-            android:text="@string/btn_cadastrarMedicamento"
-            android:textStyle="bold"
-            android:textSize="16sp"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
             android:layout_marginBottom="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/blue"
+            android:text="@string/btn_cadastrarMedicamento"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="14dp"
             app:layout_constraintBottom_toTopOf="@+id/btn_nav_view"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintVertical_bias="0.465" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 

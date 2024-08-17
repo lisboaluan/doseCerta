@@ -20,8 +20,5 @@ class HomeActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-
-
-
     }
 }

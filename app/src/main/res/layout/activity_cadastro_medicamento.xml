@@ -1,6 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        tools:context=".view.CadastroMedicamentoActivity">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_voltar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_grey"
+            app:cornerRadius="14dp"
+            android:drawableLeft="@drawable/ic_voltar"
+            android:text="@string/btn_voltar"
+            android:textColor="@color/blue"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="230dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_cadastroMedicamento"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_grey"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutNomeMedicamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/blue"
+            app:hintTextColor="@color/blue"
+            android:textColorHint="@color/gray"
+            app:endIconMode="clear_text"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_NomeMedicamento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_nomeMedicamento"
+                android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutFormato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/blue"
+            app:hintTextColor="@color/blue"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_background">
+            <Spinner
+                android:id="@+id/spinnerFormato"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/formato" />
+            </FrameLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginEnd="32dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputLayoutUnidadeMedida"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:boxStrokeColor="@color/blue"
+                            app:hintTextColor="@color/blue"
+                            android:layout_weight="1"
+                            app:endIconMode="clear_text">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edit_unidadeMedida"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLength="3"
+                                android:hint="@string/hint_unidadeMedida"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <Spinner
+                            android:id="@+id/spinnerUnidadeMedida"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:dropDownWidth="match_parent"
+                            android:entries="@array/unidadeMedida"/>
+                    </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_estoqueMedicamento"
+            android:textSize="12sp"
+            android:textColor="@color/dark_grey"
+            android:layout_gravity="start"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="32dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayoutQuantEstoque"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="@color/blue"
+                        app:hintTextColor="@color/blue"
+                        android:layout_weight="1"
+                        app:endIconMode="clear_text"
+                        app:helperText="@string/helper_campoOpcional"
+                        app:helperTextTextColor="@color/danube">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_estoque"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_quantEstoque"
+                            android:maxLength="3"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    <Spinner
+                        android:id="@+id/spinnerEstoque"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:dropDownWidth="match_parent"
+                        android:entries="@array/formato"/>
+                </LinearLayout>
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_seguinte"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/blue"
+                        app:cornerRadius="14dp"
+                        android:text="@string/btn_seguinte"
+                        android:textColor="@color/white"
+                        android:textAlignment="textStart"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="255dp"
+                        android:layout_marginEnd="32dp"/>
+                </LinearLayout>
+            </ScrollView>

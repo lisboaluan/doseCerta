@@ -3,9 +3,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_grey">#F6F6F6</color>
+    <color name="gray">#949494</color>
     <color name="dark_grey">#525151</color>
     <color name="blue">#2B78E4</color>
     <color name="colorPrimary">#1F2B5B</color>
     <color name="colorSecondary">#3DBDEC</color>
+    <color name="granada">#C96E6F</color>
+    <color name="danube">#6E93C9</color>
 
 </resources>
