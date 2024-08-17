@@ -7,103 +7,103 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
-<LinearLayout
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/white"
-    android:gravity="center"
-    tools:context=".view.LoginActivity">
-
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="50dp"
-        android:src="@drawable/logo"/>
-
-    <EditText
-        android:id="@+id/editEmail"
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_grey"
-        android:drawableEnd="@drawable/ic_email"
-        android:hint="@string/hint_email"
-        android:maxLines="1"
-        android:inputType="textEmailAddress"
-        android:gravity="start"
-        android:padding="14dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginEnd="65dp"/>
-
-    <EditText
-        android:id="@+id/editSenha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_grey"
-        android:drawableEnd="@drawable/ic_padlock"
-        android:hint="@string/hint_senha"
-        android:maxLines="1"
-        android:inputType="numberPassword"
-        android:gravity="start"
-        android:padding="14dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginEnd="65dp"/>
-
-    <Button
-        android:id="@+id/btnEntrar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
-        app:cornerRadius="14dp"
-        android:text="@string/btn_entrar"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="135dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginBottom="20dp"/>
-
-    <View
-        android:layout_width="200dp"
-        android:layout_height="1dp"
-        android:background="@color/dark_grey"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/txtCadastro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_nao_possui_conta"
-        android:textSize="20sp"
-        android:textColor="@color/dark_grey"
-        style="@style/NoUnderlineEditText"
+        android:orientation="vertical"
+        android:background="@color/white"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnEntrar"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
+        tools:context=".view.LoginActivity">
 
-    <Button
-        android:id="@+id/btnTelaCadastro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/dark_grey"
-        app:cornerRadius="14dp"
-        android:text="@string/btn_cadastre_se"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="125dp"
-        android:layout_marginEnd="125dp"
-        android:layout_marginBottom="20dp"/>
-</LinearLayout>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp"
+            android:src="@drawable/logo"/>
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_grey"
+            android:drawableEnd="@drawable/ic_email"
+            android:hint="@string/hint_email"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
+            android:gravity="start"
+            android:padding="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginEnd="65dp"/>
+
+        <EditText
+            android:id="@+id/editSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_grey"
+            android:drawableEnd="@drawable/ic_padlock"
+            android:hint="@string/hint_senha"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            android:gravity="start"
+            android:padding="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginEnd="65dp"/>
+
+        <Button
+            android:id="@+id/btnEntrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue"
+            app:cornerRadius="14dp"
+            android:text="@string/btn_entrar"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="135dp"
+            android:layout_marginEnd="135dp"
+            android:layout_marginBottom="20dp"/>
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:background="@color/dark_grey"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/txtCadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_nao_possui_conta"
+            android:textSize="20sp"
+            android:textColor="@color/dark_grey"
+            style="@style/NoUnderlineEditText"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnEntrar"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <Button
+            android:id="@+id/btnTelaCadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_grey"
+            app:cornerRadius="14dp"
+            android:text="@string/btn_cadastre_se"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="125dp"
+            android:layout_marginEnd="125dp"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
 </ScrollView>

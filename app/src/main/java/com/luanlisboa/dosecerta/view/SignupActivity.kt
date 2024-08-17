@@ -2,11 +2,13 @@ package com.luanlisboa.dosecerta.view
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.luanlisboa.dosecerta.databinding.ActivitySignupBinding
 import com.luanlisboa.dosecerta.router.RouterManager
 import com.luanlisboa.dosecerta.utils.SnackbarUtils
 import java.util.Calendar
+
 
 class SignupActivity : AppCompatActivity() {
 
@@ -33,23 +35,28 @@ class SignupActivity : AppCompatActivity() {
             val email = binding.editEmail.text.toString()
             val senha = binding.editSenha.text.toString()
 
+
             when{
                 seuNome.isEmpty() -> {
                     SnackbarUtils.mensagem(it,"Insira o seu nome!")
                 }dataNascimento.isEmpty() -> {
-                    SnackbarUtils.mensagem(it,"Insira a sua data de nascimento!")
-                }seuGenero.isEmpty() -> {
-                    SnackbarUtils.mensagem(it,"Insira o seu gênero!")
-                }email.isEmpty() -> {
-                    SnackbarUtils.mensagem(it,"Insira o seu email!")
-                }senha.isEmpty() -> {
+                SnackbarUtils.mensagem(it,"Insira a sua data de nascimento!")
+            }seuGenero.isEmpty() -> {
+                SnackbarUtils.mensagem(it,"Insira o seu gênero!")
+            }email.isEmpty() -> {
+                SnackbarUtils.mensagem(it,"Insira o seu email!")
+            }
+                !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    SnackbarUtils.mensagem(it,"Insira um email válido!")
+                }
+                senha.isEmpty() -> {
                     SnackbarUtils.mensagem(it,"Insira a sua senha")
                 }senha.length <= 7 -> {
-                    SnackbarUtils.mensagem(it,"A senha precisa ter pelo menos 8 caracteres")
-                }else -> {
-                    RouterManager.direcionarParaHome(this)
-                    // Incluir talvez uma mensagem informando que o cadastro foi concluído com sucesso
-                }
+                SnackbarUtils.mensagem(it,"A senha precisa ter pelo menos 8 caracteres")
+            }else -> {
+                RouterManager.direcionarParaHome(this)
+                // Incluir talvez uma mensagem informando que o cadastro foi concluído com sucesso
+            }
             }
         }
 
