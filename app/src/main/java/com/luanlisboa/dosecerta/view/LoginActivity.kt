@@ -3,6 +3,7 @@ package com.luanlisboa.dosecerta.view
 import android.database.sqlite.SQLiteStatement
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.luanlisboa.dosecerta.database.DatabaseHelper
 import com.luanlisboa.dosecerta.databinding.ActivityLoginBinding
@@ -35,13 +36,15 @@ class LoginActivity : AppCompatActivity() {
             when{
                 email.isEmpty() -> {
                     SnackbarUtils.mensagem(it,"Insira o seu email!")
+                }!Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    SnackbarUtils.mensagem(it,"Insira um email válido!")
                 }senha.isEmpty() -> {
-                SnackbarUtils.mensagem(it,"Insira a sua senha!")
-            }senha.length <= 7 -> {
-                SnackbarUtils.mensagem(it,"A senha precisa ter pelo menos 8 caracteres")
-            }else -> {
-                RouterManager.direcionarParaHome(this)
-            }
+                    SnackbarUtils.mensagem(it,"Insira a sua senha!")
+                }senha.length <= 7 -> {
+                    SnackbarUtils.mensagem(it,"A senha precisa ter pelo menos 8 caracteres")
+                }else -> {
+                    RouterManager.direcionarParaHome(this)
+                }
             }
         }
 

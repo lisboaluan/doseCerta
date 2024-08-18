@@ -2,6 +2,7 @@ package com.luanlisboa.dosecerta.view
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.luanlisboa.dosecerta.databinding.ActivitySignupBinding
 import com.luanlisboa.dosecerta.router.RouterManager
@@ -42,6 +43,8 @@ class SignupActivity : AppCompatActivity() {
                     SnackbarUtils.mensagem(it,"Insira o seu gênero!")
                 }email.isEmpty() -> {
                     SnackbarUtils.mensagem(it,"Insira o seu email!")
+                }!Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    SnackbarUtils.mensagem(it,"Insira um email válido!")
                 }senha.isEmpty() -> {
                     SnackbarUtils.mensagem(it,"Insira a sua senha")
                 }senha.length <= 7 -> {

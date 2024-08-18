@@ -46,6 +46,8 @@
             app:hintTextColor="@color/blue"
             android:textColorHint="@color/gray"
             app:endIconMode="clear_text"
+            app:counterEnabled="true"
+            app:counterMaxLength="25"
             android:layout_marginTop="20dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp">
@@ -55,7 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_nomeMedicamento"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:maxLength="25"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -102,8 +105,9 @@
                                 android:id="@+id/edit_unidadeMedida"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:maxLength="3"
-                                android:hint="@string/hint_unidadeMedida"/>
+                                android:inputType="number"
+                                android:hint="@string/hint_unidadeMedida"
+                                android:maxLength="3" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <Spinner
@@ -152,6 +156,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/hint_quantEstoque"
+                            android:inputType="number"
                             android:maxLength="3"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
