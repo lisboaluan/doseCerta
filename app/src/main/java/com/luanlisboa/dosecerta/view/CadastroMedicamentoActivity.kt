@@ -4,17 +4,20 @@ import com.luanlisboa.dosecerta.utils.CustomSpinnerAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.luanlisboa.dosecerta.R
+import com.luanlisboa.dosecerta.database.DatabaseHelper
 import com.luanlisboa.dosecerta.databinding.ActivityCadastroMedicamentoBinding
 import com.luanlisboa.dosecerta.router.RouterManager
 import com.luanlisboa.dosecerta.utils.SnackbarUtils
 
 class CadastroMedicamentoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCadastroMedicamentoBinding
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCadastroMedicamentoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        dbHelper = DatabaseHelper(this)
 
         val options = resources.getStringArray(R.array.formato)
 
@@ -26,6 +29,7 @@ class CadastroMedicamentoActivity : AppCompatActivity() {
             val nomeMedicamento = binding.editNomeMedicamento.text.toString()
             val spinnerFormato = binding.spinnerFormato.selectedItem.toString()
             val unidadeMedida = binding.editUnidadeMedida.text.toString()
+            val spinnerUnidadeMedida = binding.spinnerUnidadeMedida.selectedItem.toString()
             val estoque = binding.editEstoque.text.toString()
             val spinnerEstoque = binding.spinnerEstoque.selectedItem.toString()
 
@@ -41,7 +45,20 @@ class CadastroMedicamentoActivity : AppCompatActivity() {
                 }spinnerEstoque != options[0] && estoque.isEmpty() -> {
                     SnackbarUtils.mensagem(it, "Informe um valor no campo estoque!")
                 }else -> {
+                val resultado = dbHelper.inserirMedicamento(
+                    nomeMedicamento,
+                    spinnerFormato,
+                    unidadeMedida,
+                    spinnerUnidadeMedida,
+                    estoque.toInt(),
+                    spinnerEstoque
+                )
+                if (resultado > 0) {
+                    SnackbarUtils.mensagem(it, "Medicamento cadastrado com sucesso!")
                     RouterManager.direcionarParaCadastroAlerta(this)
+                } else {
+                    SnackbarUtils.mensagem(it, "Erro ao cadastrar medicamento.")
+                }
                 }
             }
         }
