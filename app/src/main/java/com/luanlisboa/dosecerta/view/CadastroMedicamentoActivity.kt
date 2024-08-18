@@ -45,20 +45,21 @@ class CadastroMedicamentoActivity : AppCompatActivity() {
                 }spinnerEstoque != options[0] && estoque.isEmpty() -> {
                     SnackbarUtils.mensagem(it, "Informe um valor no campo estoque!")
                 }else -> {
-                val resultado = dbHelper.inserirMedicamento(
-                    nomeMedicamento,
-                    spinnerFormato,
-                    unidadeMedida,
-                    spinnerUnidadeMedida,
-                    estoque.toInt(),
-                    spinnerEstoque
-                )
-                if (resultado > 0) {
-                    SnackbarUtils.mensagem(it, "Medicamento cadastrado com sucesso!")
-                    RouterManager.direcionarParaCadastroAlerta(this)
-                } else {
-                    SnackbarUtils.mensagem(it, "Erro ao cadastrar medicamento.")
-                }
+                    val estoqueInt = if (estoque.isEmpty()) -1 else estoque.toInt()
+                    val resultado = dbHelper.inserirMedicamento(
+                        nomeMedicamento,
+                        spinnerFormato,
+                        unidadeMedida,
+                        spinnerUnidadeMedida,
+                        estoqueInt,
+                        spinnerEstoque
+                    )
+                    if (resultado > 0) {
+                        SnackbarUtils.mensagem(it, "Medicamento cadastrado com sucesso!")
+                        RouterManager.direcionarParaCadastroAlerta(this)
+                    } else {
+                        SnackbarUtils.mensagem(it, "Erro ao cadastrar medicamento.")
+                    }
                 }
             }
         }

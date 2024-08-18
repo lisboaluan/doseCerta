@@ -85,8 +85,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 "formato TEXT NOT NULL," +
                 "medida TEXT NOT NULL," +
                 "unidMedida TEXT NOT NULL," +
-                "quantEstoque TEXT NOT NULL," +
-                "formatoEstoque TEXT NOT NULL," +
+                "quantEstoque INTEGER," +
+                "formatoEstoque TEXT," +
                 "data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP," +
                 "data_atualizacao DATETIME" +
                 ");"
