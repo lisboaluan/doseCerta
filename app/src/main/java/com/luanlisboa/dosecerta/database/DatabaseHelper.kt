@@ -1,5 +1,6 @@
 package com.luanlisboa.dosecerta.database
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -147,4 +148,22 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         Log.i("info_db", "Executou onUpgrade")
 
     }
+
+    fun inserirMedicamento(nome: String, formato: String, medida: String, unidMedida: String, quantEstoque: Int, formatoEstoque: String): Long {
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply {
+            put("nome", nome)
+            put("formato", formato)
+            put("medida", medida)
+            put("unidMedida", unidMedida)
+            put("quantEstoque", quantEstoque)
+            put("formatoEstoque", formatoEstoque)
+        }
+
+        // Insere o medicamento no banco de dados e retorna o ID da linha inserida ou -1 em caso de falha
+        val resultado = db.insert("tbl_Medicamento", null, contentValues)
+        db.close()  // Fecha o banco de dados após a operação
+        return resultado
+    }
 }
+
