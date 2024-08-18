@@ -45,14 +45,15 @@ class CadastroMedicamentoActivity : AppCompatActivity() {
                 }spinnerEstoque != options[0] && estoque.isEmpty() -> {
                     SnackbarUtils.mensagem(it, "Informe um valor no campo estoque!")
                 }else -> {
-                    val estoqueInt = if (estoque.isEmpty()) -1 else estoque.toInt()
+                    val estoqueInt = if (estoque.isEmpty()) 0 else estoque.toInt()
+                    val spinnerEstoque = if (spinnerEstoque == options[0]) null else spinnerEstoque.toString()
                     val resultado = dbHelper.inserirMedicamento(
                         nomeMedicamento,
                         spinnerFormato,
                         unidadeMedida,
                         spinnerUnidadeMedida,
                         estoqueInt,
-                        spinnerEstoque
+                        spinnerEstoque.toString()
                     )
                     if (resultado > 0) {
                         SnackbarUtils.mensagem(it, "Medicamento cadastrado com sucesso!")
