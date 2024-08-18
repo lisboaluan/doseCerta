@@ -42,15 +42,15 @@ class CadastroMedicamentoActivity : AppCompatActivity() {
                     SnackbarUtils.mensagem(it,"Insira a unidade de medida!")
                 }estoque.isNotEmpty() && spinnerEstoque == options[0] -> {
                     SnackbarUtils.mensagem(it, "Selecione um formato no campo estoque!")
-                }spinnerEstoque != options[0] && estoque.isEmpty() -> {
-                    SnackbarUtils.mensagem(it, "Informe um valor no campo estoque!")
                 }else -> {
+                val estoqueInt = if (estoque.isEmpty()) -1 else estoque.toInt()
+
                 val resultado = dbHelper.inserirMedicamento(
                     nomeMedicamento,
                     spinnerFormato,
                     unidadeMedida,
                     spinnerUnidadeMedida,
-                    estoque.toInt(),
+                    estoqueInt,
                     spinnerEstoque
                 )
                 if (resultado > 0) {
