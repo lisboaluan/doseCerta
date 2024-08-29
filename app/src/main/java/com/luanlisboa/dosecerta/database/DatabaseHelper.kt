@@ -61,7 +61,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
         val sqlUsuario = "CREATE TABLE tbl_Usuario ("  +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "login TEXT NOT NULL UNIQUE,"  +
                 "senha TEXT NOT NULL," +
                 "nome TEXT NOT NULL," +
                 "email TEXT NOT NULL UNIQUE," +
@@ -149,6 +148,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
     }
 
+    //Função responsável por aquivar informações no banco de dados - Cadastro de Medicamentos
     fun inserirMedicamento(nome: String, formato: String, medida: String, unidMedida: String, quantEstoque: Int, formatoEstoque: String): Long {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply {
@@ -162,6 +162,23 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
         // Insere o medicamento no banco de dados e retorna o ID da linha inserida ou -1 em caso de falha
         val resultado = db.insert("tbl_Medicamento", null, contentValues)
+        db.close()  // Fecha o banco de dados após a operação
+        return resultado
+    }
+
+    //Função responsável por aquivar informações no banco de dados - Cadastro de Usuário
+    fun inserirUsuario(nome: String, dataNascimento: String, genero: String, email: String, senha: String): Long {
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply {
+            put("nome", nome)
+            put("senha", senha)
+            put("email", email)
+            put("dataNascimento", dataNascimento)
+            put("genero", genero)
+        }
+
+        // Insere o medicamento no banco de dados e retorna o ID da linha inserida ou -1 em caso de falha
+        val resultado = db.insert("tbl_Usuario", null, contentValues)
         db.close()  // Fecha o banco de dados após a operação
         return resultado
     }

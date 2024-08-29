@@ -4,19 +4,25 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
+import com.luanlisboa.dosecerta.database.DatabaseHelper
 import com.luanlisboa.dosecerta.databinding.ActivitySignupBinding
 import com.luanlisboa.dosecerta.router.RouterManager
 import com.luanlisboa.dosecerta.utils.SnackbarUtils
 import java.util.Calendar
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        dbHelper = DatabaseHelper(this)
 
         binding.datePickerNascimento.setOnClickListener { showDatePickerDialog() }
 
@@ -50,9 +56,23 @@ class SignupActivity : AppCompatActivity() {
                 }senha.length <= 7 -> {
                     SnackbarUtils.mensagem(it,"A senha precisa ter pelo menos 8 caracteres")
                 }else -> {
-                    RouterManager.direcionarParaHome(this)
-                    // Incluir talvez uma mensagem informando que o cadastro foi concluído com sucesso
-                }
+                    // Cadastra usuário no banco de dados
+                    val resultado = dbHelper.inserirUsuario(
+                        seuNome,
+                        dataNascimento,
+                        seuGenero,
+                        email,
+                        senha
+                    )
+                    if (resultado > 0) {
+                        SnackbarUtils.mensagem(it, "Usuário cadastrado com sucesso!")
+                        RouterManager.direcionarParaCadastroAlerta(this)
+                    } else {
+                        SnackbarUtils.mensagem(it, "Erro ao cadastrar usuário.")
+                    }
+                        RouterManager.direcionarParaHome(this)
+                        // Incluir talvez uma mensagem informando que o cadastro foi concluído com sucesso
+                    }
             }
         }
 
