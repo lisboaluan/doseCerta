@@ -5,6 +5,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import android.widget.Toast
+import com.luanlisboa.dosecerta.router.RouterManager
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
@@ -181,5 +183,22 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
         val resultado = db.insert("tbl_Usuario", null, contentValues)
         db.close()  // Fecha o banco de dados após a operação
         return resultado
+    }
+
+
+    // Função para validar o login do usuário
+
+    fun validarUsuario(email: String, senha: String): Boolean {
+        val db = this.readableDatabase
+        val query = "SELECT * FROM tbl_Usuario WHERE email = ? AND senha = ?"
+        val cursor = db.rawQuery(query, arrayOf(email, senha))
+
+        // Verifica se o cursor retornou algum resultado
+        val usuarioValido = cursor.count > 0
+
+        cursor.close()
+        db.close()
+
+        return usuarioValido
     }
 }
