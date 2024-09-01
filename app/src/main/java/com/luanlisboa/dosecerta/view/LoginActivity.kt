@@ -50,10 +50,10 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+     }
 
         binding.btnTelaCadastro.setOnClickListener{
             RouterManager.direcionarParaCadastro(this)
         }
- }
     }
 }

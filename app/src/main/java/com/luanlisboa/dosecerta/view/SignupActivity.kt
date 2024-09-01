@@ -66,11 +66,11 @@ class SignupActivity : AppCompatActivity() {
                     )
                     if (resultado > 0) {
                         SnackbarUtils.mensagem(it, "Usuário cadastrado com sucesso!")
-                        RouterManager.direcionarParaCadastroAlerta(this)
+                        RouterManager.direcionarParaLogin(this)
                     } else {
                         SnackbarUtils.mensagem(it, "Erro ao cadastrar usuário.")
                     }
-                    RouterManager.direcionarParaHome(this)
+                    RouterManager.direcionarParaLogin(this)
                     // Incluir talvez uma mensagem informando que o cadastro foi concluído com sucesso
                 }
             }
