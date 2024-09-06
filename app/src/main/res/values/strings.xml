@@ -19,7 +19,8 @@
     <string name="hint_email">Email</string>
     <string name="hint_senha">Senha</string>
 
-    <!-- Tela home-->
+    <!-- Tela home/tratamento-->
+    <string name="txt_listMedicamentos">Aqui serão listados os medicamentos já cadastrado</string>
     <string name="btn_cadastrarMedicamento">Cadastrar Medicamento</string>
 
     <!-- Tela de cadastro de medicamentos-->
@@ -31,7 +32,6 @@
     <string name="txt_estoqueMedicamento">Informe a quantidade em estoque desse medicamento</string>
 
     <!-- Fragments -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_btn_bar_tratamento">Tratamento</string>
     <string name="menu_btn_bar_relatorio">Relatório</string>
     <string name="menu_btn_bar_anotacao">Anotações</string>
@@ -41,5 +41,13 @@
     <string name="btn_seguinte">Seguinte</string>
     <string name="helper_campoOpcional">* Opcional</string>
 
-    Opcional
+
+    <!--    Fragment Relatório-->
+    <string name="txt_relatorio">Aqui será a tela de relatórios</string>
+
+    <!--    Fragment Anotações-->
+    <string name="txt_anotacoes">Aqui será a tela de anotações</string>
+
+    <!--    Fragment Perfil-->
+    <string name="txt_perfil">Aqui será a tela de perfil</string>
 </resources>

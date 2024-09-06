@@ -2,6 +2,7 @@ package com.luanlisboa.dosecerta.router
 
 import android.content.Context
 import android.content.Intent
+import com.luanlisboa.dosecerta.fragments.TratamentoFragment
 import com.luanlisboa.dosecerta.view.CadastroAlertaActivity
 import com.luanlisboa.dosecerta.view.CadastroMedicamentoActivity
 import com.luanlisboa.dosecerta.view.SignupActivity
@@ -28,9 +29,9 @@ object RouterManager {
         context.startActivity(intent)
     }
 
-        fun direcionarParaCadastroMedicamento(context: Context) {
-        val intent = Intent(context, CadastroMedicamentoActivity::class.java)
-        context.startActivity(intent)
+        fun direcionarParaCadastroMedicamento(fragment: TratamentoFragment) {
+        val intent = Intent(fragment.requireContext(), CadastroMedicamentoActivity::class.java)
+        fragment.startActivity(intent)
     }
 
         fun direcionarParaCadastroAlerta(context: Context) {
