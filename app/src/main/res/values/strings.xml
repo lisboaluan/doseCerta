@@ -14,7 +14,6 @@
     <string name="txt_nao_possui_conta">Não possui uma conta?</string>
     <string name="btn_cadastre_se">Cadastre-se</string>
 
-
     <!-- Tela de login e cadastro de usuário -->
     <string name="hint_email">Email</string>
     <string name="hint_senha">Senha</string>
@@ -30,6 +29,18 @@
     <string name="txt_cadastroMedicamento">Cadastre o seu medicamento</string>
     <string name="txt_estoqueMedicamento">Informe a quantidade em estoque desse medicamento</string>
 
+    <!-- Tela de cadastro de alertas-->
+    <string name="txt_cadastroAlerta">Cadastre o seu alerta</string>
+    <string name="txt_frequencia">Frequência</string>
+    <string name="txt_periodicidade">Relembre a cada</string>
+    <string name="txt_duracaoTratamento">Por quantos dias?</string>
+    <string name="txt_horarioPrimeiraDose">Horário da 1ª dose</string>
+    <string name="txt_dose">Dose</string>
+    <string name="hint_selecione">Selecione</string>
+    <string name="txt_posologia">Posologia</string>
+    <string name="txt_horario">Horário</string>
+
+
     <!-- Fragments -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_btn_bar_tratamento">Tratamento</string>
@@ -37,9 +48,8 @@
     <string name="menu_btn_bar_anotacao">Anotações</string>
     <string name="menu_btn_bar_perfil">Perfil</string>
 
+    <!-- Utils -->
     <string name="btn_voltar">Voltar</string>
     <string name="btn_seguinte">Seguinte</string>
     <string name="helper_campoOpcional">* Opcional</string>
-
-    Opcional
 </resources>
