@@ -1,74 +1,92 @@
 package com.luanlisboa.dosecerta.view
 
-import android.app.AlertDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
-import android.widget.NumberPicker
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.luanlisboa.dosecerta.R
 import com.luanlisboa.dosecerta.database.DatabaseHelper
 import com.luanlisboa.dosecerta.databinding.ActivityCadastroAlertaBinding
-import java.util.Calendar
+import com.luanlisboa.dosecerta.repository.AlertaRepository
+import com.luanlisboa.dosecerta.repository.MedicamentoRepository
+import com.luanlisboa.dosecerta.repository.UsuarioRepository
+import com.luanlisboa.dosecerta.router.RouterManager
+import com.luanlisboa.dosecerta.utils.PickerUtils
+import com.luanlisboa.dosecerta.utils.SnackbarUtils
 
 class CadastroAlertaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCadastroAlertaBinding
-    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var alertaRepository: AlertaRepository
+    private lateinit var medicamentoRepository: MedicamentoRepository
+    private lateinit var usuarioRepository: UsuarioRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCadastroAlertaBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        dbHelper = DatabaseHelper(this)
 
-        // Configura o comportamento do campo "Horário da 1º dose"
-        val horarioPrimeiraDoseTextView: TextView = findViewById(R.id.horarioPrimeiraDoseValue)
-        horarioPrimeiraDoseTextView.setOnClickListener {
-            showTimePickerDialog(horarioPrimeiraDoseTextView)
-        }
+        alertaRepository = AlertaRepository(this)
+        medicamentoRepository = MedicamentoRepository(this)
+        usuarioRepository = UsuarioRepository(this)
 
-        // Configura o comportamento do campo "Periodicidade"
-        val periodicidadeTextView: TextView = findViewById(R.id.periodicidadeValue)
-        periodicidadeTextView.setOnClickListener {
-            showNumberPickerDialog(periodicidadeTextView, "Escolha um intervalo", " horas")
-        }
+       /* binding.btnConfirmar.setOnClickListener {
+            val horarioDose = binding.horarioPrimeiraDoseValue.text.toString()
+            val periodicidade = binding.periodicidadeValue.text.toString()
+            val duracaoTratamento = binding.duracaoTratamentoValue.text.toString()
+            val dose = binding.doseValue.text.toString()
+            val notificar = if (binding.switchNotificar.isChecked) 1 else 0
 
-        // Configura o comportamento do campo "Duração do Tratamento"
-        val duracaoTratamentoTextView: TextView = findViewById(R.id.duracaoTratamentoValue)
-        duracaoTratamentoTextView.setOnClickListener {
-            showNumberPickerDialog(duracaoTratamentoTextView, "Escolha a duração do tratamento", " dias")
-        }
-    }
+            val resultado = alertaRepository.inserirAlerta(
+                periodicidade,
+                horarioDose,
+                duracaoTratamento,
+                dose,
+                notificar,
+                idMedicamento,
+                idUsuario
+            )
 
-    private fun showTimePickerDialog(textView: TextView) {
-        // Obtém a hora atual para definir como padrão no TimePickerDialog
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-
-        // Exibe o TimePickerDialog
-        val timePickerDialog = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
-            val selectedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
-            textView.text = "$selectedTime horas" // Define o horário selecionado no TextView
-        }, hour, minute, true) // true para formato 24 horas
-
-        timePickerDialog.show()
-    }
-
-    private fun showNumberPickerDialog(textView: TextView, title: String, suffix: String) {
-        val numberPicker = NumberPicker(this).apply {
-            minValue = 1
-            maxValue = 30
-        }
-
-        AlertDialog.Builder(this)
-            .setTitle(title)
-            .setView(numberPicker)
-            .setPositiveButton("OK") { _, _ ->
-                val selectedValue = numberPicker.value
-                textView.text = "$selectedValue$suffix"
+            if (resultado > 0) {
+                SnackbarUtils.mensagem(it, "Alerta cadastrado com sucesso!")
+                RouterManager.direcionarParaHome(this)
+            } else {
+                SnackbarUtils.mensagem(it, "Erro ao cadastrar alerta.")
             }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        }
+
+        binding.btnVoltar.setOnClickListener {
+            finish()
+        } */
+
+        // Recuperar o formato selecionado no "Cadastro de Medicamentos"
+        val sharedPreferences = getSharedPreferences("FormatoPrefs", MODE_PRIVATE)
+        val selectedFormat = sharedPreferences.getString("selectedFormat", "unidade")
+
+        // Configurar o campo "Dose" com base no formato recuperado
+        binding.doseValue.setOnClickListener {
+            PickerUtils.showDosePickerDialog(this, binding.doseValue, selectedFormat ?: "unidade")
+        }
+
+        setupTimePicker()
+        setupPeriodicidadePicker()
+        setupDuracaoTratamentoPicker()
+    }
+
+    private fun setupTimePicker() {
+        binding.horarioPrimeiraDoseValue.setOnClickListener {
+            PickerUtils.showTimePickerDialog(this, binding.horarioPrimeiraDoseValue)
+        }
+    }
+
+    private fun setupPeriodicidadePicker() {
+        binding.periodicidadeValue.setOnClickListener {
+            PickerUtils.showNumberPickerDialog(this, binding.periodicidadeValue, "Escolha um intervalo", " horas")
+        }
+    }
+
+    private fun setupDuracaoTratamentoPicker() {
+        binding.duracaoTratamentoValue.setOnClickListener {
+            PickerUtils.showNumberPickerDialog(this, binding.duracaoTratamentoValue, "Escolha a duração do tratamento", " dias")
+        }
     }
 }
+
+
+

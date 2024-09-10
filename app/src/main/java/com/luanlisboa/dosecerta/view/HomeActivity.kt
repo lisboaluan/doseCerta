@@ -3,15 +3,12 @@ package com.luanlisboa.dosecerta.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
-import androidx.navigation.NavController
 import com.luanlisboa.dosecerta.R
 import com.luanlisboa.dosecerta.databinding.ActivityHomeBinding
 import com.luanlisboa.dosecerta.fragments.AnotacaoFragment
 import com.luanlisboa.dosecerta.fragments.PerfilFragment
 import com.luanlisboa.dosecerta.fragments.RelatorioFragment
 import com.luanlisboa.dosecerta.fragments.TratamentoFragment
-import com.luanlisboa.dosecerta.router.RouterManager
 
 class HomeActivity : AppCompatActivity() {
 

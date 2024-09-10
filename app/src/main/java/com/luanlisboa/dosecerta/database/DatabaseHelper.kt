@@ -1,12 +1,9 @@
 package com.luanlisboa.dosecerta.database
 
-import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import android.widget.Toast
-import com.luanlisboa.dosecerta.router.RouterManager
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
@@ -148,57 +145,5 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
         Log.i("info_db", "Executou onUpgrade")
 
-    }
-
-    //Função responsável por aquivar informações no banco de dados - Cadastro de Medicamentos
-    fun inserirMedicamento(nome: String, formato: String, medida: String, unidMedida: String, quantEstoque: Int, formatoEstoque: String): Long {
-        val db = this.writableDatabase
-        val contentValues = ContentValues().apply {
-            put("nome", nome)
-            put("formato", formato)
-            put("medida", medida)
-            put("unidMedida", unidMedida)
-            put("quantEstoque", quantEstoque)
-            put("formatoEstoque", formatoEstoque)
-        }
-
-        // Insere o medicamento no banco de dados e retorna o ID da linha inserida ou -1 em caso de falha
-        val resultado = db.insert("tbl_Medicamento", null, contentValues)
-        db.close()  // Fecha o banco de dados após a operação
-        return resultado
-    }
-
-    //Função responsável por aquivar informações no banco de dados - Cadastro de Usuário
-    fun inserirUsuario(nome: String, dataNascimento: String, genero: String, email: String, senha: String): Long {
-        val db = this.writableDatabase
-        val contentValues = ContentValues().apply {
-            put("nome", nome)
-            put("senha", senha)
-            put("email", email)
-            put("dataNascimento", dataNascimento)
-            put("genero", genero)
-        }
-
-        // Insere o medicamento no banco de dados e retorna o ID da linha inserida ou -1 em caso de falha
-        val resultado = db.insert("tbl_Usuario", null, contentValues)
-        db.close()  // Fecha o banco de dados após a operação
-        return resultado
-    }
-
-
-    // Função para validar o login do usuário
-
-    fun validarUsuario(email: String, senha: String): Boolean {
-        val db = this.readableDatabase
-        val query = "SELECT * FROM tbl_Usuario WHERE email = ? AND senha = ?"
-        val cursor = db.rawQuery(query, arrayOf(email, senha))
-
-        // Verifica se o cursor retornou algum resultado
-        val usuarioValido = cursor.count > 0
-
-        cursor.close()
-        db.close()
-
-        return usuarioValido
     }
 }

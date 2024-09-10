@@ -185,7 +185,7 @@
                         android:id="@+id/doseValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="formato"
+                        android:text="Selecione"
                         android:textSize="16sp"
                         android:layout_weight="2"
                         android:gravity="right"
@@ -197,20 +197,55 @@
                         android:focusable="true"
                         app:drawableEndCompat="@drawable/ic_arrow_drop_down" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_grey"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ativar Notificações"
+                        android:textSize="16sp"
+                        android:textColor="@color/dark_grey"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switch_notificar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:checked="false"
+                        app:switchMinWidth="56dp"
+                        app:switchPadding="16dp"
+                        app:thumbTint="@color/blue"
+                        app:trackTint="@color/gray"/>
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_seguinte"
+            android:id="@+id/btn_confirmar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"
             app:cornerRadius="14dp"
-            android:text="@string/btn_seguinte"
+            android:text="@string/btn_confirmar"
             android:textColor="@color/white"
             android:textAlignment="textStart"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="255dp"
+            android:layout_marginStart="240dp"
             android:layout_marginEnd="32dp"/>
     </LinearLayout>
 </ScrollView>
