@@ -73,7 +73,7 @@ class CadastroMedicamentoActivity : AppCompatActivity() {
 
                     if (resultado > 0) {
                         SnackbarUtils.mensagem(it, "Medicamento cadastrado com sucesso!")
-                        RouterManager.direcionarParaCadastroAlerta(this)
+                        RouterManager.direcionarParaCadastroAlerta(this, resultado)
                     } else {
                         SnackbarUtils.mensagem(it, "Erro ao cadastrar medicamento.")
                     }

@@ -1,5 +1,7 @@
 package com.luanlisboa.dosecerta.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
@@ -43,8 +45,9 @@ class LoginActivity : AppCompatActivity() {
                     SnackbarUtils.mensagem(it, "A senha precisa ter pelo menos 8 caracteres")
                 }
                 else -> {
-                    // Validar o usuário com o método do UsuarioRepository
-                    if (usuarioRepository.validarUsuario(email, senha)) {
+                    val idUsuario = usuarioRepository.validarUsuario(email, senha)
+                    if (idUsuario != null && idUsuario > 0) {
+                        saveUserId(this, idUsuario)
                         RouterManager.direcionarParaHome(this)
                     } else {
                         SnackbarUtils.mensagem(it, "Email ou senha incorretos.")
@@ -57,5 +60,12 @@ class LoginActivity : AppCompatActivity() {
             RouterManager.direcionarParaCadastro(this)
         }
     }
-}
 
+    private fun saveUserId(context: Context, userId: Int) {
+        val sharedPref: SharedPreferences = context.getSharedPreferences("UsuarioPrefs", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putInt("idUsuario", userId)
+            apply()
+        }
+    }
+}

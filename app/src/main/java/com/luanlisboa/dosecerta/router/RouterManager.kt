@@ -19,23 +19,24 @@ object RouterManager {
         context.startActivity(intent)
     }
 
-        fun direcionarParaLogin(context: Context){
+    fun direcionarParaLogin(context: Context){
         val intent = Intent(context, LoginActivity::class.java)
         context.startActivity(intent)
     }
 
-        fun direcionarParaHome(context: Context){
+    fun direcionarParaHome(context: Context){
         val intent = Intent(context, HomeActivity::class.java)
         context.startActivity(intent)
     }
 
-        fun direcionarParaCadastroMedicamento(fragment: TratamentoFragment) {
+    fun direcionarParaCadastroMedicamento(fragment: TratamentoFragment) {
         val intent = Intent(fragment.requireContext(), CadastroMedicamentoActivity::class.java)
         fragment.startActivity(intent)
     }
 
-        fun direcionarParaCadastroAlerta(context: Context) {
+    fun direcionarParaCadastroAlerta(context: Context, idMedicamento: Long) {
         val intent = Intent(context, CadastroAlertaActivity::class.java)
+        intent.putExtra("idMedicamento", idMedicamento)
         context.startActivity(intent)
     }
 }
