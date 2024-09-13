@@ -1,15 +1,23 @@
 package com.luanlisboa.dosecerta.view
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.luanlisboa.dosecerta.database.DatabaseHelper
 import com.luanlisboa.dosecerta.databinding.ActivityCadastroAlertaBinding
+import com.luanlisboa.dosecerta.repository.AgendaRepository
 import com.luanlisboa.dosecerta.repository.AlertaRepository
 import com.luanlisboa.dosecerta.repository.MedicamentoRepository
 import com.luanlisboa.dosecerta.repository.UsuarioRepository
 import com.luanlisboa.dosecerta.router.RouterManager
 import com.luanlisboa.dosecerta.utils.PickerUtils
 import com.luanlisboa.dosecerta.utils.SnackbarUtils
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import kotlin.math.ceil
 
 class CadastroAlertaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCadastroAlertaBinding
@@ -17,6 +25,7 @@ class CadastroAlertaActivity : AppCompatActivity() {
     private lateinit var medicamentoRepository: MedicamentoRepository
     private lateinit var usuarioRepository: UsuarioRepository
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCadastroAlertaBinding.inflate(layoutInflater)
@@ -26,12 +35,14 @@ class CadastroAlertaActivity : AppCompatActivity() {
         medicamentoRepository = MedicamentoRepository(this)
         usuarioRepository = UsuarioRepository(this)
 
-       /* binding.btnConfirmar.setOnClickListener {
+        binding.btnConfirmar.setOnClickListener {
             val horarioDose = binding.horarioPrimeiraDoseValue.text.toString()
             val periodicidade = binding.periodicidadeValue.text.toString()
             val duracaoTratamento = binding.duracaoTratamentoValue.text.toString()
             val dose = binding.doseValue.text.toString()
             val notificar = if (binding.switchNotificar.isChecked) 1 else 0
+            val idUsuario = getUserId(this).toLong()
+            val idMedicamento = intent.getLongExtra("idMedicamento", -1).toLong()
 
             val resultado = alertaRepository.inserirAlerta(
                 periodicidade,
@@ -39,11 +50,17 @@ class CadastroAlertaActivity : AppCompatActivity() {
                 duracaoTratamento,
                 dose,
                 notificar,
-                idMedicamento,
-                idUsuario
+                idUsuario,
+                idMedicamento
             )
 
             if (resultado > 0) {
+                createNotificationAlerts(
+                    resultado,
+                    horarioDose.replace(" horas", "").trim(),
+                    periodicidade.replace(" horas", "").trim(),
+                    duracaoTratamento.replace(" dias", "").trim()
+                )
                 SnackbarUtils.mensagem(it, "Alerta cadastrado com sucesso!")
                 RouterManager.direcionarParaHome(this)
             } else {
@@ -53,7 +70,7 @@ class CadastroAlertaActivity : AppCompatActivity() {
 
         binding.btnVoltar.setOnClickListener {
             finish()
-        } */
+        }
 
         // Recuperar o formato selecionado no "Cadastro de Medicamentos"
         val sharedPreferences = getSharedPreferences("FormatoPrefs", MODE_PRIVATE)
@@ -84,6 +101,37 @@ class CadastroAlertaActivity : AppCompatActivity() {
     private fun setupDuracaoTratamentoPicker() {
         binding.duracaoTratamentoValue.setOnClickListener {
             PickerUtils.showNumberPickerDialog(this, binding.duracaoTratamentoValue, "Escolha a duração do tratamento", " dias")
+        }
+    }
+
+    private fun getUserId(context: Context): Int {
+        val sharedPref: SharedPreferences = context.getSharedPreferences("UsuarioPrefs", Context.MODE_PRIVATE)
+        return sharedPref.getInt("idUsuario", -1)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationAlerts(
+        idAlerta: Long,
+        horarioPrimeiraDose: String,
+        periodicidade: String,
+        duracaoTratamento: String
+    ) {
+        val quantidadeDeDoses = ceil(duracaoTratamento.toDouble() * 24 / periodicidade.toDouble()).toInt()
+
+        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+        val localTime = LocalTime.parse(horarioPrimeiraDose, formatter)
+        val currentDate = LocalDateTime.now().toLocalDate()
+        var localDateTime = LocalDateTime.of(currentDate, localTime)
+        val agendaRepository = AgendaRepository(this)
+
+        repeat(quantidadeDeDoses) {
+            val resultado = agendaRepository.inserirAgenda(
+                localDateTime.toString(),
+                0,
+                idAlerta,
+                0
+            )
+            localDateTime = localDateTime.plusHours(periodicidade.toLong())
         }
     }
 }

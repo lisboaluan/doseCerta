@@ -23,14 +23,21 @@ class UsuarioRepository(context: Context) {
         return resultado
     }
 
-    fun validarUsuario(email: String, senha: String): Boolean {
+    fun validarUsuario(email: String, senha: String): Int? {
         val db: SQLiteDatabase = dbHelper.readableDatabase
         val query = "SELECT * FROM tbl_Usuario WHERE email = ? AND senha = ?"
         val cursor = db.rawQuery(query, arrayOf(email, senha))
 
-        val isValid = cursor.count > 0
+        var idUsuario: Int? = null
+
+        if (cursor.moveToFirst()) {
+            val idIndex = cursor.getColumnIndex("id")
+            idUsuario = cursor.getInt(idIndex)
+        }
+
         cursor.close()
         db.close()
-        return isValid
+
+        return idUsuario
     }
 }
