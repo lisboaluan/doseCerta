@@ -1,6 +1,7 @@
 package com.luanlisboa.dosecerta.view
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Patterns
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.luanlisboa.dosecerta.databinding.ActivityLoginBinding
 import com.luanlisboa.dosecerta.repository.UsuarioRepository
 import com.luanlisboa.dosecerta.router.RouterManager
+import com.luanlisboa.dosecerta.utils.SessionManager
 import com.luanlisboa.dosecerta.utils.SnackbarUtils
 
 class LoginActivity : AppCompatActivity() {
@@ -47,8 +49,10 @@ class LoginActivity : AppCompatActivity() {
                 else -> {
                     val idUsuario = usuarioRepository.validarUsuario(email, senha)
                     if (idUsuario != null && idUsuario > 0) {
-                        saveUserId(this, idUsuario)
-                        RouterManager.direcionarParaHome(this)
+                        SessionManager.loggedInUserId = idUsuario
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
                         SnackbarUtils.mensagem(it, "Email ou senha incorretos.")
                     }

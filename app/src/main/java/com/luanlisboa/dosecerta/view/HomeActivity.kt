@@ -21,9 +21,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(TratamentoFragment())
 
-//        binding.btnCadastrarTratamento.setOnClickListener{
-//            RouterManager.direcionarParaCadastroMedicamento(this)
-//        }
         supportActionBar?.hide()
 
         binding.btnNavView.setOnItemSelectedListener {
@@ -48,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentRelatorio, fragment)
+        fragmentTransaction.replace(R.id.fragmentMenu, fragment)
         fragmentTransaction.commit()
     }
 }

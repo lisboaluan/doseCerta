@@ -41,7 +41,6 @@ class CadastroAlertaActivity : AppCompatActivity() {
             val duracaoTratamento = binding.duracaoTratamentoValue.text.toString()
             val dose = binding.doseValue.text.toString()
             val notificar = if (binding.switchNotificar.isChecked) 1 else 0
-            val idUsuario = getUserId(this).toLong()
             val idMedicamento = intent.getLongExtra("idMedicamento", -1).toLong()
 
             val resultado = alertaRepository.inserirAlerta(
@@ -50,7 +49,6 @@ class CadastroAlertaActivity : AppCompatActivity() {
                 duracaoTratamento,
                 dose,
                 notificar,
-                idUsuario,
                 idMedicamento
             )
 
@@ -135,6 +133,3 @@ class CadastroAlertaActivity : AppCompatActivity() {
         }
     }
 }
-
-
-
