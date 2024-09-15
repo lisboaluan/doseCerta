@@ -6,23 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.luanlisboa.dosecerta.R
+import com.luanlisboa.dosecerta.databinding.FragmentTratamentoBinding
+import com.luanlisboa.dosecerta.models.Medicamento
+import com.luanlisboa.dosecerta.repository.AlertaRepository
+import com.luanlisboa.dosecerta.repository.MedicamentoRepository
 import com.luanlisboa.dosecerta.router.RouterManager
+import com.luanlisboa.dosecerta.utils.TratamentoAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TratamentoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class TratamentoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var tratamentoAdapter: TratamentoAdapter
+    private lateinit var tratamentoList: List<Medicamento>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +36,20 @@ class TratamentoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        val binding = FragmentTratamentoBinding.inflate(inflater, container, false)
 
-        return inflater.inflate(R.layout.fragment_tratamento, container, false)
+        // Configura o RecyclerView
+        setupRecyclerView(binding)
+
+        // Carregar dados do banco de dados
+        tratamentoList = buscarTratamentosDoBanco()
+
+        // Configurar o adapter com os dados
+        tratamentoAdapter = TratamentoAdapter(tratamentoList)
+        binding.resumoTratamentos.adapter = tratamentoAdapter
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,19 +60,9 @@ class TratamentoFragment : Fragment() {
         btnCadastroMedicamento.setOnClickListener{
             RouterManager.direcionarParaCadastroMedicamento(this)
         }
-
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TratamentoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             TratamentoFragment().apply {
@@ -69,5 +71,26 @@ class TratamentoFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun setupRecyclerView(binding: FragmentTratamentoBinding) {
+        binding.resumoTratamentos.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun buscarTratamentosDoBanco(): List<Medicamento> {
+        val medicamentoRepository = MedicamentoRepository(requireContext())
+        val alertaRepository = AlertaRepository(requireContext())
+
+        // Recuperar dados dos medicamentos e alertas
+        val medicamentos = medicamentoRepository.getAllMedicamentos()
+        val alertas = alertaRepository.getAllAlertas()
+
+        return medicamentos.zip(alertas).map { (medicamento, alerta) ->
+            Medicamento(
+                nome = medicamento.nome,
+                dosagem = alerta.dosagem,
+                horario = alerta.horarioPrimeiraDose
+            )
+        }
     }
 }

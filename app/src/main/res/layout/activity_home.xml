@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,10 +11,8 @@
         android:orientation="vertical"
         android:background="@color/white">
 
-
-
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentRelatorio"
+            android:id="@+id/fragmentMenu"
             android:name="com.luanlisboa.dosecerta.fragments.RelatorioFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -24,7 +20,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btn_nav_view"
@@ -38,8 +33,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:menu="@menu/bottom_nav"/>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 
