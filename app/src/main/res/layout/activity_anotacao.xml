@@ -1,64 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NovaAnotacaoActivity">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".view.AnotacaoActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtAnotacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:text="Crie a sua anotação"
+        android:textColor="@color/dark_grey"
+        android:textSize="20sp"/>
+
+    <ImageView
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_salvar_anotacao"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/txtAnotacao"
+        android:layout_marginEnd="6dp"/>
+
+    <EditText
+        android:id="@+id/tituloAnotacao"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Informe um título ou uma data"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:layout_below="@id/txtAnotacao"
+        android:background="@drawable/borda_anotacoes"
+        android:layout_marginTop="16dp"
+        android:maxLines="1"/>
+
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:hint="Como você esta se sentindo hoje?"
         android:gravity="top"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <EditText
-            android:id="@+id/escrevaAnotacao"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@color/light_grey"
-            android:hint="Escreva sua anotação aqui ..."
-            android:inputType="textMultiLine"
-            android:minLines="1"
-            android:maxLines="12"
-            android:gravity="top"
-            android:scrollbars="vertical"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:layout_marginTop="150dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_voltarAnotacao"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/blue"
-                android:text="Voltar"
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_confirmar"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/blue"
-                android:text="Confirmar"
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-
-</FrameLayout>
+        android:padding="12dp"
+        android:textSize="18sp"
+        android:background="@drawable/borda_anotacoes"
+        android:layout_below="@id/tituloAnotacao"
+        android:layout_marginTop="12dp"/>
+</RelativeLayout>

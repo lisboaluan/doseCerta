@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.TratamentoFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.TratamentoFragment"
+    android:background="@color/white">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resumoTratamentos"
@@ -12,16 +14,26 @@
         android:layout_margin="16dp"
         android:orientation="vertical"/>
 
-    <Button
-        android:id="@+id/btnCadastrarTratamento"
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80sp"
-        android:layout_marginRight="80sp"
-        android:layout_marginTop="450dp"
-        android:backgroundTint="@color/blue"
-        android:text="@string/btn_cadastrarMedicamento"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
-
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:gravity="center"
+        android:layout_marginTop="600dp">
+        <Button
+            android:id="@+id/btnCadastrarTratamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80sp"
+            android:layout_marginRight="80sp"
+            android:backgroundTint="@color/blue"
+            android:text="@string/btn_cadastrarMedicamento"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="14dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
 </FrameLayout>

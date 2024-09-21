@@ -8,20 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.button.MaterialButton
 import com.luanlisboa.dosecerta.R
-import com.luanlisboa.dosecerta.NovaAnotacaoActivity
+import com.luanlisboa.dosecerta.view.AnotacaoActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AnotacaoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AnotacaoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -39,10 +31,10 @@ class AnotacaoFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_anotacao, container, false)
 
-        val btnNovaAnotacao: MaterialButton = view.findViewById(R.id.btnNovaAnotacao)
+        val btnCriarAnotacao: MaterialButton = view.findViewById(R.id.btnCriarAnotacao)
 
-        btnNovaAnotacao.setOnClickListener {
-            val intent = Intent(activity, NovaAnotacaoActivity::class.java)
+        btnCriarAnotacao.setOnClickListener {
+            val intent = Intent(activity, AnotacaoActivity::class.java)
             startActivity(intent)
         }
 
@@ -50,15 +42,6 @@ class AnotacaoFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AnotacaoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             AnotacaoFragment().apply {

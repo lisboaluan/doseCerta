@@ -21,6 +21,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
         val sqlAnotacao = "CREATE TABLE tbl_Anotacao ("  +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "titulo TEXT," +
                 "mensagem TEXT NOT NULL,"  +
                 "data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP" +
                 ");"
