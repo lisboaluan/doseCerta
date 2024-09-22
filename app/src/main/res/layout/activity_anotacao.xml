@@ -28,7 +28,7 @@
         android:layout_marginEnd="6dp"/>
 
     <EditText
-        android:id="@+id/tituloAnotacao"
+        android:id="@+id/editTituloAnotacao"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:hint="Informe um título ou uma data"
@@ -40,13 +40,14 @@
         android:maxLines="1"/>
 
     <EditText
+        android:id="@+id/editAnotacao"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="Como você esta se sentindo hoje?"
-        android:gravity="top"
-        android:padding="12dp"
-        android:textSize="18sp"
+        android:layout_below="@id/editTituloAnotacao"
+        android:layout_marginTop="12dp"
         android:background="@drawable/borda_anotacoes"
-        android:layout_below="@id/tituloAnotacao"
-        android:layout_marginTop="12dp"/>
+        android:gravity="top"
+        android:hint="Como você esta se sentindo hoje?"
+        android:padding="12dp"
+        android:textSize="18sp" />
 </RelativeLayout>
