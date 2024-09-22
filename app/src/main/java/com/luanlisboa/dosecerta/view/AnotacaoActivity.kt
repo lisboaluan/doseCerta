@@ -19,8 +19,8 @@ class AnotacaoActivity : AppCompatActivity() {
         anotacaoRepository = AnotacaoRepository(this)
 
         binding.saveButton.setOnClickListener{
-            val titulo = binding.tituloAnotacao.text.toString()
-            val mensagem = binding.txtAnotacao.text.toString()
+            val titulo = binding.editTituloAnotacao.text.toString()
+            val mensagem = binding.editAnotacao.text.toString()
             when {
                 titulo.isEmpty() -> {
                     SnackbarUtils.mensagem(it, "Insira um título!")

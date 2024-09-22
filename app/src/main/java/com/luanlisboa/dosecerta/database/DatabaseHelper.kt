@@ -23,6 +23,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "titulo TEXT," +
                 "mensagem TEXT NOT NULL,"  +
+                "id_usuario INTEGER," +
                 "data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP" +
                 ");"
         try {
