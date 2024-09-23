@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +6,14 @@
     tools:context=".fragments.AnotacaoFragment"
     android:background="@color/white">
 
+    <!-- RecyclerView para exibir as anotações -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAnotacoes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical"/>
+
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -14,7 +21,9 @@
         android:orientation="vertical"
         android:background="@color/white"
         android:gravity="center"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="600dp">
+
         <Button
             android:id="@+id/btnCriarAnotacao"
             android:layout_width="match_parent"
@@ -30,4 +39,5 @@
             android:textStyle="bold"
             app:cornerRadius="14dp"/>
     </LinearLayout>
+
 </RelativeLayout>
