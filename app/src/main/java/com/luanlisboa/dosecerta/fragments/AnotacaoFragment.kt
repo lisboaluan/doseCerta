@@ -58,8 +58,23 @@ class AnotacaoFragment : Fragment() {
         val anotacoes = buscarAnotacoesDoBanco()
         adapter = AnotacoesAdapter(anotacoes)
         recyclerView.adapter = adapter
+        atualizarAnotacoes()
 
         return view
+    }
+
+    // Atualiza a lista de anotações ao retornar para a tela
+    override fun onResume() {
+        super.onResume()
+        atualizarAnotacoes()
+    }
+
+    // Função para buscar as anotações do banco e atualizar o adapter
+    private fun atualizarAnotacoes() {
+        val anotacoes = buscarAnotacoesDoBanco()
+        adapter = AnotacoesAdapter(anotacoes)
+        recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged() // Notifica o adapter sobre as mudanças
     }
 
     companion object {
@@ -79,4 +94,6 @@ class AnotacaoFragment : Fragment() {
 
         return anotacoes
     }
+
+
 }
