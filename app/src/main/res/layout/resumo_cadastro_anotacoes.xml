@@ -10,29 +10,20 @@
         android:id="@+id/tvTituloAnotacao"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Nome do Medicamento"
+        android:text="Titulo da anotação"
         android:textStyle="bold"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:id="@+id/tvDosagem"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Dosagem: 2 comprimidos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTituloAnotacao"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tvMensagemAnotacao"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Horário: 08:00"
+        android:text="Mensagem da Anotação"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDosagem"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tvTituloAnotacao"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
