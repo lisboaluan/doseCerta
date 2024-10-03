@@ -9,9 +9,9 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.luanlisboa.dosecerta.R
 
-  /* Essa classe serve para que o primeiro item do spinner do campo 'formato' da tela de cadastro de medicamentos fique com uma cor cinza,
-     parecida com a cor do hint dos demais campos dessa tela. As demais opções do spinner, vão ser exibidos com a cor preta,
-     para que se adeque ao comportamento dos demais campos quando são preenchidos pelo usuário */
+/* Essa classe serve para que o primeiro item do spinner do campo 'formato' da tela de cadastro de medicamentos fique com uma cor cinza,
+   parecida com a cor do hint dos demais campos dessa tela. As demais opções do spinner, vão ser exibidos com a cor preta,
+   para que se adeque ao comportamento dos demais campos quando são preenchidos pelo usuário */
 
 class CustomSpinnerAdapter(context: Context, private val items: Array<String>) :
     ArrayAdapter<String>(context, 0, items) {
