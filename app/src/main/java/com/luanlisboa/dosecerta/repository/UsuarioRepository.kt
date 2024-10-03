@@ -40,4 +40,22 @@ class UsuarioRepository(context: Context) {
 
         return idUsuario
     }
+
+    fun buscarUsuarioPorId(id: Int): Int? {
+        val db: SQLiteDatabase = dbHelper.readableDatabase
+        val query = "SELECT * FROM tbl_Usuario WHERE id = ?"
+        val cursor = db.rawQuery(query, arrayOf(id.toString()))
+
+        var idUsuario: Int? = null
+
+        if (cursor.moveToFirst()) {
+            val idIndex = cursor.getColumnIndex("id")
+            idUsuario = cursor.getInt(idIndex)
+        }
+
+        cursor.close()
+        db.close()
+
+        return idUsuario
+    }
 }

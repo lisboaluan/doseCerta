@@ -1,7 +1,9 @@
 package com.luanlisboa.dosecerta.view
 
+import android.R
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.luanlisboa.dosecerta.databinding.ActivitySignupBinding
 import com.luanlisboa.dosecerta.repository.UsuarioRepository
@@ -26,6 +28,13 @@ class SignupActivity : AppCompatActivity() {
             PickerUtils.showDatePickerDialog(this, binding.datePickerNascimento)
         }
 
+        // Configurando o Spinner para o campo de gênero
+        val generos = resources.getStringArray(com.luanlisboa.dosecerta.R.array.genero_options)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, generos)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerGenero.adapter = adapter
+
+        // Formatando texto do botão de login
         val textoOriginal = binding.btnTelaLogin.text.toString()
         val textoMinusculo = textoOriginal.lowercase()
         val textoFormatado = textoMinusculo.replaceFirstChar { it.uppercase() }
@@ -33,11 +42,11 @@ class SignupActivity : AppCompatActivity() {
 
         binding.btnCadastrar.setOnClickListener {
 
-            val seuNome = binding.editNome.text.toString()
-            val dataNascimento = binding.datePickerNascimento.text.toString()
-            val seuGenero = binding.editGenero.text.toString()
-            val email = binding.editEmail.text.toString()
-            val senha = binding.editSenha.text.toString()
+            var seuNome = binding.editNome.text.toString()
+            var dataNascimento = binding.datePickerNascimento.text.toString()
+            var seuGenero = binding.spinnerGenero.selectedItem.toString()
+            var email = binding.editEmail.text.toString()
+            var senha = binding.editSenha.text.toString()
 
             when {
                 seuNome.isEmpty() -> {
@@ -46,7 +55,7 @@ class SignupActivity : AppCompatActivity() {
                 dataNascimento.isEmpty() -> {
                     SnackbarUtils.mensagem(it, "Insira a sua data de nascimento!")
                 }
-                seuGenero.isEmpty() -> {
+                seuGenero == "Selecione o gênero" -> {
                     SnackbarUtils.mensagem(it, "Insira o seu gênero!")
                 }
                 email.isEmpty() -> {
@@ -71,6 +80,11 @@ class SignupActivity : AppCompatActivity() {
                         senha
                     )
                     if (resultado > 0) {
+                        seuNome = ""
+                        dataNascimento = ""
+                        seuGenero = ""
+                        email = ""
+                        senha = ""
                         SnackbarUtils.mensagem(it, "Usuário cadastrado com sucesso!")
                         RouterManager.direcionarParaLogin(this)
                     } else {

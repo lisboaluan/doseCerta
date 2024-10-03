@@ -4,7 +4,13 @@
     <!-- Tela de cadastro de usuário-->
     <string name="hint_nome">Seu Nome</string>
     <string name="hint_dtNascimento">Data de Nascimento</string>
-    <string name="hint_genero">Seu Gênero</string>
+    <string-array name="genero_options">
+        <item>Selecione o gênero</item>
+        <item>Prefiro não dizer</item>
+        <item>Masculino</item>
+        <item>Feminino</item>
+        <item>Outro</item>
+    </string-array>
     <string name="txt_criarConta">Criar uma Conta</string>
     <string name="btn_cadastrar">CADASTRAR</string>
     <string name="txt_possui_conta">Ja possui uma conta?</string>
