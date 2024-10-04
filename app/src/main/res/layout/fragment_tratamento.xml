@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.TratamentoFragment"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resumoTratamentos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="16dp"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:id="@+id/main"
@@ -20,8 +23,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
-        android:gravity="center"
-        android:layout_marginTop="600dp">
+        android:gravity="center">
         <Button
             android:id="@+id/btnCadastrarTratamento"
             android:layout_width="match_parent"
@@ -33,7 +35,8 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:cornerRadius="14dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
     </LinearLayout>
-</FrameLayout>
+
+</LinearLayout>

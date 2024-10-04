@@ -1,29 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/tvTituloAnotacao"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Titulo da anotação"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/tvMensagemAnotacao"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Mensagem da Anotação"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloAnotacao"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/tvDataCriacaoAnotacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data de Criação"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvTituloAnotacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Título da Anotação"
+            android:textStyle="bold"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp"
+            android:paddingBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvMensagemAnotacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mensagem da Anotação"
+            android:textSize="16sp"
+            android:paddingBottom="8dp"/>
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

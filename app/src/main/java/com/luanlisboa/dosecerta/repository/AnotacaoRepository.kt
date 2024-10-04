@@ -28,19 +28,25 @@ class AnotacaoRepository(context: Context) {
     fun getAllAnotacoes(): List<Anotacoes> {
         val anotacoes = mutableListOf<Anotacoes>()
         val db = dbHelper.readableDatabase
-        val cursor = db.query("tbl_Anotacao", null, "id_usuario = ?", arrayOf( SessionManager.loggedInUserId.toString()), null, null, null)
+        val cursor = db.query (
+            "tbl_Anotacao",
+                  arrayOf("titulo", "mensagem", "data_criacao"),
+         "id_usuario = ?",
+                  arrayOf(SessionManager.loggedInUserId.toString()),
+          null, null, null
+        )
 
         if (cursor.moveToFirst()) {
             do {
 
                 val titulo = cursor.getString(cursor.getColumnIndexOrThrow("titulo"))
                 val mensagem = cursor.getString(cursor.getColumnIndexOrThrow("mensagem"))
-                anotacoes.add(Anotacoes(titulo, mensagem))
+                val dataCriacao = cursor.getString(cursor.getColumnIndexOrThrow("data_criacao"))
+                anotacoes.add(Anotacoes(titulo, mensagem, dataCriacao))
             } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
-
         return anotacoes
     }
 }
