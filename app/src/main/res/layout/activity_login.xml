@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!-- ScrollView usado como contêiner para suportar rolagem, útil em telas pequenas -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
+    <!-- LinearLayout com orientação vertical para alinhar os elementos na tela de login -->
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -16,6 +18,7 @@
         android:gravity="center"
         tools:context=".view.LoginActivity">
 
+        <!-- Imagem do logo centralizada -->
         <ImageView
             android:layout_width="300dp"
             android:layout_height="100dp"
@@ -24,6 +27,7 @@
             android:layout_marginBottom="50dp"
             android:src="@drawable/logo"/>
 
+        <!-- Campo de e-mail, com drawable de ícone à direita -->
         <EditText
             android:id="@+id/editEmail"
             android:layout_width="match_parent"
@@ -36,9 +40,9 @@
             android:gravity="start"
             android:padding="14dp"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="65dp"
-            android:layout_marginEnd="65dp"/>
+            android:layout_marginHorizontal="65dp" />
 
+        <!-- Campo de senha com ícone de cadeado -->
         <EditText
             android:id="@+id/editSenha"
             android:layout_width="match_parent"
@@ -51,9 +55,9 @@
             android:gravity="start"
             android:padding="14dp"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="65dp"
-            android:layout_marginEnd="65dp"/>
+            android:layout_marginHorizontal="65dp" />
 
+        <!-- CheckBox para manter o usuário conectado -->
         <CheckBox
             android:id="@+id/checkboxManterConectado"
             android:layout_width="wrap_content"
@@ -61,10 +65,10 @@
             android:layout_marginStart="65dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="65dp"
-            android:checked="false"
-            android:text="Manter-se conectado"
+            android:text="@string/checkBox_manter_conectado"
             android:textColor="@color/dark_grey" />
 
+        <!-- Botão para entrar -->
         <Button
             android:id="@+id/btnEntrar"
             android:layout_width="match_parent"
@@ -76,16 +80,17 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="135dp"
-            android:layout_marginEnd="135dp"
+            android:layout_marginHorizontal="135dp"
             android:layout_marginBottom="20dp"/>
 
+        <!-- Linha divisória entre as seções -->
         <View
             android:layout_width="200dp"
             android:layout_height="1dp"
             android:background="@color/dark_grey"
             android:layout_marginTop="10dp"/>
 
+        <!-- Texto informando para se cadastrar -->
         <TextView
             android:id="@+id/txtCadastro"
             android:layout_width="match_parent"
@@ -93,15 +98,11 @@
             android:text="@string/txt_nao_possui_conta"
             android:textSize="20sp"
             android:textColor="@color/dark_grey"
-            style="@style/NoUnderlineEditText"
             android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnEntrar"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginHorizontal="20dp"/>
 
+        <!-- Botão para acessar a tela de cadastro -->
         <Button
             android:id="@+id/btnTelaCadastro"
             android:layout_width="match_parent"
@@ -113,8 +114,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="15dp"
-            android:layout_marginStart="125dp"
-            android:layout_marginEnd="125dp"
+            android:layout_marginHorizontal="125dp"
             android:layout_marginBottom="20dp"/>
 
     </LinearLayout>

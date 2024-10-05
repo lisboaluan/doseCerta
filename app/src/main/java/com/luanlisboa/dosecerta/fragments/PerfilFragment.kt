@@ -5,25 +5,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import com.luanlisboa.dosecerta.R
+import com.luanlisboa.dosecerta.repository.UsuarioRepository
+import com.luanlisboa.dosecerta.router.RouterManager
+import com.luanlisboa.dosecerta.utils.SessionManager
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+// Constantes para parâmetros de inicialização do fragmento
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
- * Use the [PerfilFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Fragmento que exibe o perfil do usuário.
  */
 class PerfilFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
+    // Parâmetros opcionais para passagem de argumentos no fragmento
     private var param1: String? = null
     private var param2: String? = null
 
+    // Variáveis para as views e o repositório de usuário
+    private lateinit var tvSaudacaoUsuario: TextView
+    private lateinit var ivIconeUsuario: ImageView
+    private lateinit var btnLogout: Button
+    private lateinit var usuarioRepository: UsuarioRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Verifica se o fragmento recebeu argumentos e os define
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -34,20 +45,43 @@ class PerfilFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false)
+        // Infla o layout do fragmento
+        val view = inflater.inflate(R.layout.fragment_perfil, container, false)
+
+        // Inicializa as views
+        tvSaudacaoUsuario = view.findViewById(R.id.tvSaudacaoUsuario)
+        ivIconeUsuario = view.findViewById(R.id.ivIconeUsuario)
+        btnLogout = view.findViewById(R.id.btnLogout)
+
+        // Inicializa o repositório de usuários
+        usuarioRepository = UsuarioRepository(requireContext())
+
+        // Carrega o nome do usuário a partir do banco de dados
+        val nomeUsuario = usuarioRepository.buscarNomeUsuario(SessionManager.loggedInUserId)
+        nomeUsuario?.let {
+            // Atualiza o TextView com o nome do usuário
+            tvSaudacaoUsuario.text = "Olá, $it"
+        }
+
+        // Configura o botão de logout
+        btnLogout.setOnClickListener {
+            // Realiza logout e redireciona para a tela de login
+            SessionManager.logout(requireContext())
+            RouterManager.direcionarParaLogin(requireActivity())
+        }
+
+        return view
     }
 
     companion object {
         /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
+         * Método de fábrica para criar uma nova instância do PerfilFragment
+         * usando os parâmetros fornecidos.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PerfilFragment.
+         * @param param1 Parâmetro 1.
+         * @param param2 Parâmetro 2.
+         * @return Uma nova instância de PerfilFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             PerfilFragment().apply {

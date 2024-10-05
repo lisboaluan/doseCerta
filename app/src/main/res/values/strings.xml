@@ -19,6 +19,10 @@
     <string name="btn_entrar">ENTRAR</string>
     <string name="txt_nao_possui_conta">Não possui uma conta?</string>
     <string name="btn_cadastre_se">Cadastre-se</string>
+    <string name="checkBox_manter_conectado">Manter-se conectado</string>
+
+    <!-- Tela de Perfil -->
+    <string name="btn_sair_da_conta">Sair da conta</string>
 
     <!-- Tela de login e cadastro de usuário -->
     <string name="hint_email">Email</string>
@@ -70,6 +74,7 @@
 
     <!--    Fragment Perfil-->
     <string name="txt_perfil">Aqui será a tela de perfil</string>
+    <string name="txt_ola_fulano">Olá, Fulano</string>
 
 
 </resources>
