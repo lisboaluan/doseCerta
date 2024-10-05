@@ -80,11 +80,6 @@ class SignupActivity : AppCompatActivity() {
                         senha
                     )
                     if (resultado > 0) {
-                        seuNome = ""
-                        dataNascimento = ""
-                        seuGenero = ""
-                        email = ""
-                        senha = ""
                         SnackbarUtils.mensagem(it, "Usuário cadastrado com sucesso!")
                         RouterManager.direcionarParaLogin(this)
                     } else {
