@@ -12,15 +12,15 @@ class AnotacaoRepository(context: Context) {
     // Helper para gerenciar o banco de dados SQLite
     private val dbHelper = DatabaseHelper(context)
 
-    /**
-     * Insere uma nova anotação no banco de dados para o usuário logado.
-     *
-     * @param titulo O título da anotação.
-     * @param mensagem O conteúdo da anotação.
-     * @return O ID da linha inserida ou -1 em caso de erro.
-     */
-    fun inserirAnotacao(titulo: String, mensagem: String): Long {
-        // Obtém um banco de dados gravável
+    fun inserirAnotacao(titulo: String, mensagem: String):Long{
+
+        /**
+         * Insere uma nova anotação no banco de dados para o usuário logado.
+         *
+         * @param titulo O título da anotação.
+         * @param mensagem O conteúdo da anotação.
+         * @return O ID da linha inserida ou -1 em caso de erro.
+         */
         val db: SQLiteDatabase = dbHelper.writableDatabase
         val contentValues = ContentValues().apply {
             put("titulo", titulo)
@@ -29,9 +29,29 @@ class AnotacaoRepository(context: Context) {
         }
 
         // Insere os valores na tabela tbl_Anotacao
+
         val resultado = db.insert("tbl_Anotacao", null, contentValues)
         db.close()
         return resultado
+    }
+
+    fun getAnotacaoById(id: String): Anotacoes? {
+        val db = dbHelper.readableDatabase
+        val cursor = db.query(
+            "tbl_Anotacao", null, "id = ?", arrayOf(id), null, null, null // Corrigi o nome da tabela
+        )
+        return if (cursor.moveToFirst()) {
+            val titulo = cursor.getString(cursor.getColumnIndexOrThrow("titulo"))
+            val mensagem = cursor.getString(cursor.getColumnIndexOrThrow("mensagem"))
+            val dataCriacao = cursor.getString(cursor.getColumnIndexOrThrow("data_criacao"))
+            cursor.close()
+            db.close()
+            Anotacoes(id.toLong(), titulo, mensagem, dataCriacao)
+        } else {
+            cursor.close()
+            db.close()
+            null
+        }
     }
 
     /**
@@ -39,6 +59,7 @@ class AnotacaoRepository(context: Context) {
      *
      * @return Uma lista de objetos [Anotacoes].
      */
+
     fun getAllAnotacoes(): List<Anotacoes> {
         val anotacoes = mutableListOf<Anotacoes>()
         val db = dbHelper.readableDatabase
@@ -46,28 +67,34 @@ class AnotacaoRepository(context: Context) {
         // Realiza uma consulta na tabela tbl_Anotacao filtrando pelo id_usuario e ordenando pela data de criação
         val cursor = db.query(
             "tbl_Anotacao",
-            arrayOf("titulo", "mensagem", "data_criacao"),
+
+            arrayOf("id",  "titulo", "mensagem", "data_criacao"),
             "id_usuario = ?",
             arrayOf(SessionManager.loggedInUserId.toString()),
-            null, null, "data_criacao DESC"
+            null, null, null
         )
-
-        // Verifica se há registros retornados
         if (cursor.moveToFirst()) {
             do {
-                // Obtém os valores das colunas
+                val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))
                 val titulo = cursor.getString(cursor.getColumnIndexOrThrow("titulo"))
                 val mensagem = cursor.getString(cursor.getColumnIndexOrThrow("mensagem"))
                 val dataCriacao = cursor.getString(cursor.getColumnIndexOrThrow("data_criacao"))
-
-                // Adiciona a anotação à lista
-                anotacoes.add(Anotacoes(titulo, mensagem, dataCriacao))
-            } while (cursor.moveToNext()) // Move para o próximo registro
+                anotacoes.add(Anotacoes(id.toLong()  , titulo, mensagem, dataCriacao))
+            } while (cursor.moveToNext())
+            arrayOf("titulo", "mensagem", "data_criacao")
+            "id_usuario = ?";
+            arrayOf(SessionManager.loggedInUserId.toString());null; null;"data_criacao DESC"
         }
-
         cursor.close()
         db.close()
 
         return anotacoes
     }
+
+    fun deletarAnotacao(anotacao: Anotacoes) {
+        val db = dbHelper.writableDatabase
+        db.delete("tbl_Anotacao", "id = ?", arrayOf(anotacao.id.toString()))
+        db.close()
+    }
 }
+
