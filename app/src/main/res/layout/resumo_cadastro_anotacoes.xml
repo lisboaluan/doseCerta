@@ -1,8 +1,8 @@
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="4dp">
@@ -39,6 +39,18 @@
             android:text="Mensagem da Anotação"
             android:textSize="16sp"
             android:paddingBottom="8dp"/>
+
+        <ImageButton
+            android:id="@+id/btnDeletarAnotacao"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Deletar Anotação"
+            android:src="@drawable/ic_baseline_delete_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMensagemAnotacao" />
 
 
 

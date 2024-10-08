@@ -10,6 +10,8 @@ class AnotacaoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAnotacaoBinding
     private lateinit var anotacaoRepository: AnotacaoRepository
+    private var anotacaoId: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,23 +20,28 @@ class AnotacaoActivity : AppCompatActivity() {
 
         anotacaoRepository = AnotacaoRepository(this)
 
-        binding.saveButton.setOnClickListener{
+        anotacaoId = intent.getStringExtra("anotacaoId")
+        if (anotacaoId != null) {
+            carregarAnotacao(anotacaoId!!)
+        }
+
+        binding.saveButton.setOnClickListener {
             val titulo = binding.editTituloAnotacao.text.toString()
             val mensagem = binding.editAnotacao.text.toString()
             when {
                 titulo.isEmpty() -> {
                     SnackbarUtils.mensagem(it, "Insira um título!")
                 }
-                mensagem.isEmpty() -> {
-                    SnackbarUtils.mensagem(it, "Iscreva uma anotação!")
-                }
-                else -> {
 
+                mensagem.isEmpty() -> {
+                    SnackbarUtils.mensagem(it, "Escreva uma anotação!")
+                }
+
+                else -> {
                     val resultado = anotacaoRepository.inserirAnotacao(
                         titulo,
                         mensagem
                     )
-
                     if (resultado > 0) {
                         SnackbarUtils.mensagem(it, "Anotação salva com sucesso!")
                         finish()
@@ -44,5 +51,17 @@ class AnotacaoActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.btnVoltar.setOnClickListener {
+            finish()
+        }
     }
+    private fun carregarAnotacao(anotacaoId: String) {
+        val anotacao = anotacaoRepository.getAnotacaoById(anotacaoId)
+        if (anotacao != null) {
+            binding.editTituloAnotacao.setText(anotacao.titulo)
+            binding.editAnotacao.setText(anotacao.mensagem)
+        }
+    }
+
+
 }
