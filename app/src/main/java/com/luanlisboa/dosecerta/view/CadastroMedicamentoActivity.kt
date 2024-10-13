@@ -31,6 +31,7 @@ class CadastroMedicamentoActivity : AppCompatActivity() {
 
             val sharedPreferences = getSharedPreferences("FormatoPrefs", MODE_PRIVATE)
             val editor = sharedPreferences.edit()
+            editor.clear()
             editor.putString("selectedFormat", spinnerFormato)
             editor.apply()
 

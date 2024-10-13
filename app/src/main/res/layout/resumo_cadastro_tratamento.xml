@@ -8,33 +8,81 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
+    <!-- Layout principal agora é horizontal para alinhar botões à direita -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvTituloAnotacao"
-            android:layout_width="wrap_content"
+        <!-- Layout com informações do medicamento -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nome do Medicamento"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvDosagem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dosagem: 2 comprimidos"
-            android:layout_marginBottom="8dp"/>
+            <!-- Nome do Medicamento -->
+            <TextView
+                android:id="@+id/tvTituloAnotacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome do Medicamento"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:id="@+id/tvMensagemAnotacao"
+            <!-- Um LinearLayout aninhado para informações adicionais -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Dosagem do Medicamento -->
+                <TextView
+                    android:id="@+id/tvDosagem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dosagem: 2 comprimidos"
+                    android:layout_marginBottom="8dp"/>
+
+                <!-- Horário do Medicamento -->
+                <TextView
+                    android:id="@+id/tvMensagemAnotacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Horário: 08:00"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Botões de edição e exclusão ao lado direito -->
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Horário: 08:00"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Botão de editar (ícone de lápis) -->
+            <ImageButton
+                android:id="@+id/btnEditar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_anotacao_icon"
+                android:contentDescription="@string/editar"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginEnd="8dp"
+                app:tint="@color/blue" />
+
+            <!-- Botão de excluir (ícone de lata de lixo) -->
+            <ImageButton
+                android:id="@+id/btnExcluir"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:contentDescription="@string/excluir"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/blue"  />
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        tools:context=".view.EditarMedicamentoActivity">
+
+        <!-- Botão Voltar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_voltar_editar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_grey"
+            app:cornerRadius="14dp"
+            android:drawableLeft="@drawable/ic_voltar"
+            android:text="@string/btn_voltar"
+            android:textColor="@color/blue"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="16dp"/>
+
+        <!-- Título Edição Medicamento -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_editarMedicamento"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_grey"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"/>
+
+        <!-- Campo Nome do Medicamento -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutNomeMedicamentoEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/blue"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_NomeMedicamentoEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_nomeMedicamento"
+                android:maxLines="1"
+                android:maxLength="25"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo Formato do Medicamento -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutFormatoEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/blue"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_background">
+                <Spinner
+                    android:id="@+id/spinnerFormatoEditar"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:entries="@array/formato" />
+            </FrameLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Unidade de Medida e Quantidade -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutUnidadeMedidaEditar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxStrokeColor="@color/blue"
+                android:hint="@string/hint_unidadeMedida">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_unidadeMedidaEditar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinnerUnidadeMedidaEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:dropDownWidth="match_parent"
+                android:entries="@array/unidadeMedida"/>
+        </LinearLayout>
+
+        <!-- Quantidade em Estoque -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_estoqueMedicamento"
+            android:textSize="12sp"
+            android:textColor="@color/dark_grey"
+            android:layout_gravity="start"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="32dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutQuantEstoqueEditar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxStrokeColor="@color/blue"
+                android:hint="@string/hint_quantEstoque">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_estoqueEditar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="3"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinnerEstoqueEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:dropDownWidth="match_parent"
+                android:entries="@array/formato"/>
+        </LinearLayout>
+
+        <!-- Botão Salvar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_salvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue"
+            app:cornerRadius="14dp"
+            android:text="@string/btn_salvar"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"/>
+
+    </LinearLayout>
+</ScrollView>

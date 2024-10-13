@@ -31,6 +31,8 @@
     <!-- Tela home/tratamento-->
     <string name="txt_listMedicamentos">Aqui serão listados os medicamentos já cadastrado</string>
     <string name="btn_cadastrarMedicamento">Cadastrar Medicamento</string>
+    <string name="editar">Editar\n</string>
+    <string name="excluir">Excluir</string>
 
     <!-- Tela de cadastro de medicamentos-->
     <string name="hint_nomeMedicamento">Nome do Medicamento</string>
@@ -39,6 +41,10 @@
     <string name="hint_quantEstoque">Estoque</string>
     <string name="txt_cadastroMedicamento">Cadastre o seu medicamento</string>
     <string name="txt_estoqueMedicamento">Informe a quantidade em estoque desse medicamento</string>
+
+    <!-- Tela de editar de tratamento-->
+    <string name="txt_editarMedicamento">Editar tratamento\n</string>
+    <string name="btn_salvar">Salvar</string>
 
     <!-- Tela de cadastro de alertas-->
     <string name="txt_cadastroAlerta">Cadastre o seu alerta</string>
