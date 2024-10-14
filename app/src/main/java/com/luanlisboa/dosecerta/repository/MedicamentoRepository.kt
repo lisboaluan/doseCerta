@@ -52,18 +52,37 @@ class MedicamentoRepository (context: Context) {
         return medicamentos
     }
 
-    fun atualizarMedicamento(id: Long, nome: String, dosagem: String, horario: String): Int {
+    fun atualizarMedicamento(
+        id: Long,
+        nome: String,
+        formato: String,
+        medida: String,
+        unidMedida: String,
+        quantEstoque: Int,
+        formatoEstoque: String?
+    ): Int {
         val db: SQLiteDatabase = dbHelper.writableDatabase
         val contentValues = ContentValues().apply {
             put("nome", nome)
-            put("dosagem", dosagem)
-            put("horario", horario)
+            put("formato", formato)
+            put("medida", medida)
+            put("unidMedida", unidMedida)
+            put("quantEstoque", quantEstoque)
+            put("formatoEstoque", formatoEstoque)
         }
 
-        val resultado = db.update("tbl_Medicamento", contentValues, "id = ? AND id_usuario = ?", arrayOf(id.toString(), SessionManager.loggedInUserId.toString()))
+        // Atualiza o medicamento com o ID correspondente no banco de dados
+        val resultado = db.update(
+            "tbl_Medicamento",
+            contentValues,
+            "id = ? AND id_usuario = ?",
+            arrayOf(id.toString(), SessionManager.loggedInUserId.toString())
+        )
+
         db.close()
         return resultado
     }
+
 
 
     fun deletarMedicamento(id: Long): Int {

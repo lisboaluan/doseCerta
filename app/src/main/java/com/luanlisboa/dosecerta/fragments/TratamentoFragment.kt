@@ -19,7 +19,6 @@ import com.luanlisboa.dosecerta.utils.TratamentoAdapter
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
 class TratamentoFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
@@ -58,9 +57,9 @@ class TratamentoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnCadastroMedicamento : Button = view.findViewById(R.id.btnCadastrarTratamento)
+        val btnCadastroMedicamento: Button = view.findViewById(R.id.btnCadastrarTratamento)
 
-        btnCadastroMedicamento.setOnClickListener{
+        btnCadastroMedicamento.setOnClickListener {
             RouterManager.direcionarParaCadastroMedicamento(this)
         }
     }
