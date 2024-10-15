@@ -27,10 +27,10 @@ class AlertaRepository(context: Context) {
         return resultado
     }
 
-    fun getAllAlertas(): List<Alerta> {
+    fun getAllAlertas(idMedicamento: Long): List<Alerta> {
         val alertas = mutableListOf<Alerta>()
         val db = dbHelper.readableDatabase
-        val cursor = db.query("tbl_Alerta", null, "id_usuario = ?", arrayOf( SessionManager.loggedInUserId.toString()), null, null, null)
+        val cursor = db.query("tbl_Alerta", null, "id_usuario = ? AND id_medicamento = ?", arrayOf( SessionManager.loggedInUserId.toString(), idMedicamento.toString()), null, null, null)
 
         if (cursor.moveToFirst()) {
             do {

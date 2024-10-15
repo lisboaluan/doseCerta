@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.luanlisboa.dosecerta.R
 import com.luanlisboa.dosecerta.databinding.FragmentTratamentoBinding
@@ -18,12 +19,11 @@ import com.luanlisboa.dosecerta.utils.TratamentoAdapter
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
 class TratamentoFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var tratamentoAdapter: TratamentoAdapter
-    private lateinit var tratamentoList: List<Medicamento>
+    private lateinit var tratamentoList: MutableList<Medicamento>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +43,12 @@ class TratamentoFragment : Fragment() {
         setupRecyclerView(binding)
 
         // Carregar dados do banco de dados
-        tratamentoList = buscarTratamentosDoBanco()
+        tratamentoList = buscarTratamentosDoBanco().toMutableList()
 
-        // Configurar o adapter com os dados
-        tratamentoAdapter = TratamentoAdapter(tratamentoList)
+        // Configurar o adapter com os dados e o callback de exclusão
+        tratamentoAdapter = TratamentoAdapter(tratamentoList) { medicamento ->
+            excluirMedicamento(medicamento)
+        }
         binding.resumoTratamentos.adapter = tratamentoAdapter
 
         return binding.root
@@ -55,10 +57,25 @@ class TratamentoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnCadastroMedicamento : Button = view.findViewById(R.id.btnCadastrarTratamento)
+        val btnCadastroMedicamento: Button = view.findViewById(R.id.btnCadastrarTratamento)
 
-        btnCadastroMedicamento.setOnClickListener{
+        btnCadastroMedicamento.setOnClickListener {
             RouterManager.direcionarParaCadastroMedicamento(this)
+        }
+    }
+
+    private fun excluirMedicamento(medicamento: Medicamento) {
+        val medicamentoRepository = MedicamentoRepository(requireContext())
+        val resultado = medicamentoRepository.deletarMedicamento(medicamento.id!!)
+
+        if (resultado > 0) {
+            // Remove o medicamento da lista e notifica o adapter
+            tratamentoList.remove(medicamento)
+            tratamentoAdapter.notifyDataSetChanged()
+
+            Toast.makeText(requireContext(), "Medicamento excluído com sucesso!", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Erro ao excluir medicamento!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -83,13 +100,24 @@ class TratamentoFragment : Fragment() {
 
         // Recuperar dados dos medicamentos e alertas
         val medicamentos = medicamentoRepository.getAllMedicamentos()
-        val alertas = alertaRepository.getAllAlertas()
 
-        return medicamentos.zip(alertas).map { (medicamento, alerta) ->
+        // Mapear os alertas para cada medicamento com base no id do medicamento
+        return medicamentos.map { medicamento ->
+            // Buscar alertas específicos para cada medicamento
+            val alertas = alertaRepository.getAllAlertas(medicamento.id!!)
+
+            // Verificar se há alerta relacionado, caso contrário, usar valores padrão
+            val alerta = alertas.firstOrNull()
+
             Medicamento(
+                id = medicamento.id,
                 nome = medicamento.nome,
-                dosagem = alerta.dosagem,
-                horario = alerta.horarioPrimeiraDose
+                formato = alerta?.dosagem ?: "Sem dosagem", // Valor padrão caso não haja alerta
+                medida = medicamento.medida,
+                unidMedida = medicamento.unidMedida,
+                quantEstoque = medicamento.quantEstoque,
+                formatoEstoque = medicamento.formatoEstoque,
+                horarioPrimeiraDose = alerta?.horarioPrimeiraDose ?: "Sem horário" // Valor padrão caso não haja alerta
             )
         }
     }
