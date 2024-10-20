@@ -71,7 +71,7 @@ class AnotacaoRepository(context: Context) {
             arrayOf("id",  "titulo", "mensagem", "data_criacao"),
             "id_usuario = ?",
             arrayOf(SessionManager.loggedInUserId.toString()),
-            null, null, null
+            null, null, "id DESC"
         )
         if (cursor.moveToFirst()) {
             do {
@@ -81,9 +81,6 @@ class AnotacaoRepository(context: Context) {
                 val dataCriacao = cursor.getString(cursor.getColumnIndexOrThrow("data_criacao"))
                 anotacoes.add(Anotacoes(id.toLong()  , titulo, mensagem, dataCriacao))
             } while (cursor.moveToNext())
-            arrayOf("titulo", "mensagem", "data_criacao")
-            "id_usuario = ?";
-            arrayOf(SessionManager.loggedInUserId.toString());null; null;"data_criacao DESC"
         }
         cursor.close()
         db.close()

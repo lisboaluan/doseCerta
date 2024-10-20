@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.luanlisboa.dosecerta.R
 import com.luanlisboa.dosecerta.databinding.FragmentTratamentoBinding
 import com.luanlisboa.dosecerta.models.Medicamento
+import com.luanlisboa.dosecerta.repository.AgendaRepository
 import com.luanlisboa.dosecerta.repository.AlertaRepository
 import com.luanlisboa.dosecerta.repository.MedicamentoRepository
 import com.luanlisboa.dosecerta.router.RouterManager
@@ -47,7 +48,7 @@ class TratamentoFragment : Fragment() {
 
         // Configurar o adapter com os dados e o callback de exclusão
         tratamentoAdapter = TratamentoAdapter(tratamentoList) { medicamento ->
-            excluirMedicamento(medicamento)
+            excluirTratamento(medicamento)
         }
         binding.resumoTratamentos.adapter = tratamentoAdapter
 
@@ -64,11 +65,16 @@ class TratamentoFragment : Fragment() {
         }
     }
 
-    private fun excluirMedicamento(medicamento: Medicamento) {
+    private fun excluirTratamento(medicamento: Medicamento) {
         val medicamentoRepository = MedicamentoRepository(requireContext())
-        val resultado = medicamentoRepository.deletarMedicamento(medicamento.id!!)
+        val alertaRepository = AlertaRepository(requireContext())
+        val agendaRepository = AgendaRepository(requireContext())
 
-        if (resultado > 0) {
+        val resultadoMedicamento = medicamentoRepository.deletarMedicamento(medicamento.id!!)
+        val resultadoAlerta = alertaRepository.deletarAlerta(medicamento.id)
+        val resultadoAgenda = agendaRepository.deletarAgenda(medicamento.id.toLong())
+
+        if (resultadoMedicamento > 0 || resultadoAlerta > 0 || resultadoAgenda > 0) {
             // Remove o medicamento da lista e notifica o adapter
             tratamentoList.remove(medicamento)
             tratamentoAdapter.notifyDataSetChanged()

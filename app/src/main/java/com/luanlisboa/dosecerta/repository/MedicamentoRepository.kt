@@ -83,8 +83,6 @@ class MedicamentoRepository (context: Context) {
         return resultado
     }
 
-
-
     fun deletarMedicamento(id: Long): Int {
         val db: SQLiteDatabase = dbHelper.writableDatabase
         val resultado = db.delete("tbl_Medicamento", "id = ? AND id_usuario = ?", arrayOf(id.toString(), SessionManager.loggedInUserId.toString()))
