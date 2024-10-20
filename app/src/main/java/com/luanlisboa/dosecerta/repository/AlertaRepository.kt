@@ -27,6 +27,13 @@ class AlertaRepository(context: Context) {
         return resultado
     }
 
+    fun deletarAlerta(id: Long): Int {
+        val db: SQLiteDatabase = dbHelper.writableDatabase
+        val resultado = db.delete("tbl_Alerta", "id_medicamento = ? AND id_usuario = ?", arrayOf(id.toString(), SessionManager.loggedInUserId.toString()))
+        db.close()
+        return resultado
+    }
+
     fun getAllAlertas(idMedicamento: Long): List<Alerta> {
         val alertas = mutableListOf<Alerta>()
         val db = dbHelper.readableDatabase

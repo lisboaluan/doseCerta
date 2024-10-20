@@ -26,5 +26,12 @@ class AgendaRepository(context: Context) {
         db.close()
         return resultado
     }
+
+    fun deletarAgenda(idAlerta: Long): Int {
+        val db: SQLiteDatabase = dbHelper.writableDatabase
+        val resultado = db.delete("tbl_Agenda", "id_alerta = ?", arrayOf(idAlerta.toString()))
+        db.close()
+        return resultado
+    }
 }
 
