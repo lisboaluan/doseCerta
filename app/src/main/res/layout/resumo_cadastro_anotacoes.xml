@@ -5,55 +5,70 @@
     xmlns:app="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     card_view:cardCornerRadius="8dp"
-    card_view:cardElevation="4dp"
+    card_view:cardElevation="8dp"
     app:ignore="NamespaceTypo">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp"
         android:background="@android:color/white">
 
-        <TextView
-            android:id="@+id/tvDataCriacaoAnotacao"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:ignore="Suspicious0dp">
+
+            <TextView
+                android:id="@+id/tvDataCriacaoAnotacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data de Criação"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/tvTituloAnotacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Título da Anotação"
+                android:textStyle="bold"
+                android:textColor="@color/dark_grey"
+                android:textSize="18sp"
+                android:paddingBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvMensagemAnotacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mensagem da Anotação"
+                android:textSize="16sp"
+                android:paddingBottom="8dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Data de Criação"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvTituloAnotacao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Título da Anotação"
-            android:textStyle="bold"
-            android:textColor="@color/dark_grey"
-            android:textSize="18sp"
-            android:paddingBottom="8dp"/>
-
-        <TextView
-            android:id="@+id/tvMensagemAnotacao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mensagem da Anotação"
-            android:textSize="16sp"
-            android:paddingBottom="8dp"/>
-
-        <ImageButton
-            android:id="@+id/btnDeletarAnotacao"
-            android:layout_width="55dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Deletar Anotação"
-            android:src="@drawable/ic_baseline_delete_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMensagemAnotacao" />
-
-
+            <!-- Botão de excluir (ícone de lata de lixo) -->
+            <ImageButton
+                android:id="@+id/btnDeletarAnotacao"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:contentDescription="@string/excluir"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/blue" />
+        </LinearLayout>
 
     </LinearLayout>
+
+
+
 </androidx.cardview.widget.CardView>
