@@ -41,10 +41,11 @@ class AlertaRepository(context: Context) {
 
         if (cursor.moveToFirst()) {
             do {
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
                 val periodicidade = cursor.getString(cursor.getColumnIndexOrThrow("periodicidade"))
                 val horarioPrimeiraDose = cursor.getString(cursor.getColumnIndexOrThrow("horarioPrimeiraDose"))
                 val dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem"))
-                alertas.add(Alerta(periodicidade, horarioPrimeiraDose, dosagem))
+                alertas.add(Alerta(id, periodicidade, horarioPrimeiraDose, dosagem))
             } while (cursor.moveToNext())
         }
         cursor.close()

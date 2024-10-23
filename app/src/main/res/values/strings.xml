@@ -60,7 +60,7 @@
 
     <!-- Fragments -->
     <string name="menu_btn_bar_tratamento">Tratamento</string>
-    <string name="menu_btn_bar_relatorio">Relatório</string>
+    <string name="menu_btn_bar_agenda">Agenda</string>
     <string name="menu_btn_bar_anotacao">Anotações</string>
     <string name="menu_btn_bar_perfil">Perfil</string>
 

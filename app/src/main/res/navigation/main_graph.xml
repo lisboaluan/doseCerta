@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/relatorioFragment"
-        android:name="com.luanlisboa.dosecerta.fragments.RelatorioFragment"
+        android:name="com.luanlisboa.dosecerta.fragments.AgendaFragment"
         android:label="fragment_relatorio"
-        tools:layout="@layout/fragment_relatorio" />
+        tools:layout="@layout/fragment_agenda" />
 
     <fragment
         android:id="@+id/anotacaoFragment"

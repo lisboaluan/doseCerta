@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/menu_relatorio"
-        android:title="@string/menu_btn_bar_relatorio"
+        android:title="@string/menu_btn_bar_agenda"
         android:icon="@drawable/ic_relatorio_icon"/>
 
     <item

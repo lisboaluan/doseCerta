@@ -5,10 +5,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.luanlisboa.dosecerta.database.DatabaseHelper
 import com.luanlisboa.dosecerta.models.Alerta
-import com.luanlisboa.dosecerta.utils.SessionManager
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.util.Locale
 
 class AgendaRepository(context: Context) {
     private val dbHelper = DatabaseHelper(context)
@@ -33,5 +29,39 @@ class AgendaRepository(context: Context) {
         db.close()
         return resultado
     }
+
+    fun obterAlertasPorData(data: String): List<Alerta> {
+        val db: SQLiteDatabase = dbHelper.readableDatabase
+
+        // Query corrigida para verificar se a coluna dataHora segue o formato correto
+        val query = """
+        SELECT tbl_Agenda.dataHora, tbl_Agenda.situacaoIngestao, tbl_Alerta.id, tbl_Alerta.periodicidade, 
+               tbl_Alerta.horarioPrimeiraDose, tbl_Alerta.dosagem 
+        FROM tbl_Agenda
+        JOIN tbl_Alerta ON tbl_Agenda.id_alerta = tbl_Alerta.id
+        WHERE date(tbl_Agenda.dataHora) = ?
+        ORDER BY time(tbl_Agenda.dataHora) ASC
+    """
+
+        val cursor = db.rawQuery(query, arrayOf(data))
+
+        val alertas = mutableListOf<Alerta>()
+        if (cursor.moveToFirst()) {
+            do {
+                val alerta = Alerta(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    periodicidade = cursor.getString(cursor.getColumnIndexOrThrow("periodicidade")),
+                    horarioPrimeiraDose = cursor.getString(cursor.getColumnIndexOrThrow("horarioPrimeiraDose")),
+                    dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem")),
+                )
+                alertas.add(alerta)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return alertas
+    }
+
+
 }
 

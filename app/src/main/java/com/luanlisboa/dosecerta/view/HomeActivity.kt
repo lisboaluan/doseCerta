@@ -7,7 +7,7 @@ import com.luanlisboa.dosecerta.R
 import com.luanlisboa.dosecerta.databinding.ActivityHomeBinding
 import com.luanlisboa.dosecerta.fragments.AnotacaoFragment
 import com.luanlisboa.dosecerta.fragments.PerfilFragment
-import com.luanlisboa.dosecerta.fragments.RelatorioFragment
+import com.luanlisboa.dosecerta.fragments.AgendaFragment
 import com.luanlisboa.dosecerta.fragments.TratamentoFragment
 
 class HomeActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
         binding.btnNavView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_tratamento -> replaceFragment(TratamentoFragment())
-                R.id.menu_relatorio -> replaceFragment(RelatorioFragment())
+                R.id.menu_relatorio -> replaceFragment(AgendaFragment())
                 R.id.menu_anotacao -> replaceFragment(AnotacaoFragment())
                 R.id.menu_perfil -> replaceFragment(PerfilFragment())
                 else -> replaceFragment(TratamentoFragment())
