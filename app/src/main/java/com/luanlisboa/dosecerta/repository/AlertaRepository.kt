@@ -4,7 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.luanlisboa.dosecerta.database.DatabaseHelper
-import com.luanlisboa.dosecerta.models.Alerta
+import com.luanlisboa.dosecerta.models.Tratamento
 import com.luanlisboa.dosecerta.utils.SessionManager
 
 class AlertaRepository(context: Context) {
@@ -34,8 +34,8 @@ class AlertaRepository(context: Context) {
         return resultado
     }
 
-    fun getAllAlertas(idMedicamento: Long): List<Alerta> {
-        val alertas = mutableListOf<Alerta>()
+    fun getAllAlertas(idMedicamento: Long): List<Tratamento> {
+        val tratamentos = mutableListOf<Tratamento>()
         val db = dbHelper.readableDatabase
         val cursor = db.query("tbl_Alerta", null, "id_usuario = ? AND id_medicamento = ?", arrayOf( SessionManager.loggedInUserId.toString(), idMedicamento.toString()), null, null, null)
 
@@ -45,13 +45,13 @@ class AlertaRepository(context: Context) {
                 val periodicidade = cursor.getString(cursor.getColumnIndexOrThrow("periodicidade"))
                 val horarioPrimeiraDose = cursor.getString(cursor.getColumnIndexOrThrow("horarioPrimeiraDose"))
                 val dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem"))
-                alertas.add(Alerta(id, periodicidade, horarioPrimeiraDose, dosagem))
+                tratamentos.add(Tratamento(id, periodicidade, horarioPrimeiraDose, dosagem))
             } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
 
-        return alertas
+        return tratamentos
     }
 }
 

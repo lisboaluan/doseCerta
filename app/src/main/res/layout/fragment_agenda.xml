@@ -20,10 +20,11 @@
         android:layout_gravity="center"
         android:padding="16dp"/>
 
-    <!-- RecyclerView para exibir os alertas -->
+    <!-- RecyclerView para exibir os alertas em uma linha do tempo com cartões -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/alertRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:visibility="gone"/>
 </LinearLayout>
-
