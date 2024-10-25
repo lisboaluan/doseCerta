@@ -5,86 +5,73 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.luanlisboa.dosecerta.R
+import com.luanlisboa.dosecerta.databinding.FragmentAgendaBinding
 import com.luanlisboa.dosecerta.repository.AgendaRepository
 import com.luanlisboa.dosecerta.utils.AlertasAdapter
-
-// TODO: Rename parameter arguments, choose names that match
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class AgendaFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    private lateinit var calendarView: CalendarView
-    private lateinit var alertRecyclerView: RecyclerView
-    private lateinit var emptyMessage: TextView
+    private var _binding: FragmentAgendaBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var adapter: AlertasAdapter
     private lateinit var repository: AgendaRepository
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_agenda, container, false)
+        _binding = FragmentAgendaBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        calendarView = view.findViewById(R.id.calendarView)
-        alertRecyclerView = view.findViewById(R.id.alertRecyclerView)
-        emptyMessage = view.findViewById(R.id.emptyMessage)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        // Configurar o RecyclerView
-        alertRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        // Configura o RecyclerView
+        binding.alertRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = AlertasAdapter(emptyList())
-        alertRecyclerView.adapter = adapter
+        binding.alertRecyclerView.adapter = adapter
 
         // Instanciar o repositório
         repository = AgendaRepository(requireContext())
 
-        // Configurar listener para mudanças de data
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+        // Obter a data atual e carregar alertas
+        val currentDate = getCurrentDate()
+        carregarAlertasDoDia(currentDate)
+
+        // Listener para mudanças de data no CalendarView
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = "$year-${month + 1}-$dayOfMonth"
             carregarAlertasDoDia(selectedDate)
         }
-
-        return view
     }
 
-private fun carregarAlertasDoDia(data: String) {
-    val alertas = repository.obterAlertasPorData(data)
-
-    if (alertas.isEmpty()) {
-        alertRecyclerView.visibility = View.GONE
-        emptyMessage.visibility = View.VISIBLE
-    } else {
-        alertRecyclerView.visibility = View.VISIBLE
-        emptyMessage.visibility = View.GONE
-        adapter.updateAlertas(alertas)
+    // Função para obter a data atual no formato desejado
+    private fun getCurrentDate(): String {
+        val calendar = Calendar.getInstance()
+        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
     }
-}
 
-    companion object {
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AgendaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun carregarAlertasDoDia(data: String) {
+        val agendas = repository.obterAgendasPorData(data)
+
+        if (agendas.isEmpty()) {
+            binding.alertRecyclerView.visibility = View.GONE
+            binding.emptyMessage.visibility = View.VISIBLE
+        } else {
+            binding.alertRecyclerView.visibility = View.VISIBLE
+            binding.emptyMessage.visibility = View.GONE
+            adapter.updateAlertas(agendas)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

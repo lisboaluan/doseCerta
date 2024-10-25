@@ -4,7 +4,9 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.luanlisboa.dosecerta.database.DatabaseHelper
-import com.luanlisboa.dosecerta.models.Alerta
+import com.luanlisboa.dosecerta.models.Agenda
+import com.luanlisboa.dosecerta.models.Tratamento
+import com.luanlisboa.dosecerta.utils.SessionManager
 
 class AgendaRepository(context: Context) {
     private val dbHelper = DatabaseHelper(context)
@@ -30,37 +32,41 @@ class AgendaRepository(context: Context) {
         return resultado
     }
 
-    fun obterAlertasPorData(data: String): List<Alerta> {
+    fun obterAgendasPorData(data: String): List<Agenda> {
         val db: SQLiteDatabase = dbHelper.readableDatabase
-
-        // Query corrigida para verificar se a coluna dataHora segue o formato correto
         val query = """
-        SELECT tbl_Agenda.dataHora, tbl_Agenda.situacaoIngestao, tbl_Alerta.id, tbl_Alerta.periodicidade, 
-               tbl_Alerta.horarioPrimeiraDose, tbl_Alerta.dosagem 
+        SELECT tbl_Medicamento.nome, 
+               time(tbl_Agenda.dataHora) AS hora, 
+               tbl_Alerta.dosagem,
+               date(tbl_Agenda.dataHora) AS dataDeIngestao,
+               tbl_Agenda.situacaoIngestao  -- Campo para situação de ingestão
         FROM tbl_Agenda
         JOIN tbl_Alerta ON tbl_Agenda.id_alerta = tbl_Alerta.id
+        JOIN tbl_Medicamento ON tbl_Alerta.id_medicamento = tbl_Medicamento.id
         WHERE date(tbl_Agenda.dataHora) = ?
+        AND tbl_Medicamento.id_usuario = ?
         ORDER BY time(tbl_Agenda.dataHora) ASC
     """
+        val cursor = db.rawQuery(query, arrayOf(data, SessionManager.loggedInUserId.toString()))
 
-        val cursor = db.rawQuery(query, arrayOf(data))
-
-        val alertas = mutableListOf<Alerta>()
+        val agendas = mutableListOf<Agenda>()
         if (cursor.moveToFirst()) {
             do {
-                val alerta = Alerta(
-                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                    periodicidade = cursor.getString(cursor.getColumnIndexOrThrow("periodicidade")),
-                    horarioPrimeiraDose = cursor.getString(cursor.getColumnIndexOrThrow("horarioPrimeiraDose")),
-                    dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem")),
+                val agenda = Agenda(
+                    nome = cursor.getString(cursor.getColumnIndexOrThrow("nome")),  // Nome do medicamento
+                    hora = cursor.getString(cursor.getColumnIndexOrThrow("hora")),  // Hora da dose
+                    dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem")),  // Dosagem
+                    situacaoIngestao = cursor.getInt(cursor.getColumnIndexOrThrow("situacaoIngestao")),  // Situação de ingestão
+                    dataDeIngestao = cursor.getString(cursor.getColumnIndexOrThrow("dataDeIngestao"))  // Data de ingestão
                 )
-                alertas.add(alerta)
+                agendas.add(agenda)
             } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
-        return alertas
+        return agendas
     }
+
 
 
 }
