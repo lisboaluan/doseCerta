@@ -15,31 +15,31 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <!-- Icon for medication -->
+        <!-- Bolinha de status (vermelho, verde, ou cinza) -->
         <ImageView
-            android:id="@+id/iconAlert"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_medicine"
+            android:id="@+id/statusButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_status_silver" />  <!-- Default é cinza -->
 
-        <!-- Vertical line for timeline effect -->
+        <!-- Linha vertical para indicar a timeline -->
         <View
             android:id="@+id/verticalLine"
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimary" />
 
-        <!-- Details of the alert -->
+        <!-- Detalhes do medicamento -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!-- Name of the medication -->
+            <!-- Nome do medicamento -->
             <TextView
                 android:id="@+id/medicationName"
                 android:layout_width="wrap_content"
@@ -47,25 +47,25 @@
                 android:text="Nome do Medicamento"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black" />
 
-            <!-- Time of the dose -->
+            <!-- Hora do medicamento -->
             <TextView
                 android:id="@+id/timeAlert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="08:00"
                 android:textSize="14sp"
-                android:textColor="@color/blue"/>
+                android:textColor="@color/blue" />
 
-            <!-- Dosage of the medication -->
+            <!-- Dosagem do medicamento -->
             <TextView
                 android:id="@+id/dosageAlert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="500 mg"
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"/>
+                android:textColor="@android:color/darker_gray" />
         </LinearLayout>
 
     </LinearLayout>

@@ -37,7 +37,9 @@ class AgendaRepository(context: Context) {
         val query = """
         SELECT tbl_Medicamento.nome, 
                time(tbl_Agenda.dataHora) AS hora, 
-               tbl_Alerta.dosagem 
+               tbl_Alerta.dosagem,
+               date(tbl_Agenda.dataHora) AS dataDeIngestao,
+               tbl_Agenda.situacaoIngestao  -- Campo para situação de ingestão
         FROM tbl_Agenda
         JOIN tbl_Alerta ON tbl_Agenda.id_alerta = tbl_Alerta.id
         JOIN tbl_Medicamento ON tbl_Alerta.id_medicamento = tbl_Medicamento.id
@@ -45,15 +47,17 @@ class AgendaRepository(context: Context) {
         AND tbl_Medicamento.id_usuario = ?
         ORDER BY time(tbl_Agenda.dataHora) ASC
     """
-        val cursor = db.rawQuery(query, arrayOf(data,SessionManager.loggedInUserId.toString()))
+        val cursor = db.rawQuery(query, arrayOf(data, SessionManager.loggedInUserId.toString()))
 
         val agendas = mutableListOf<Agenda>()
         if (cursor.moveToFirst()) {
             do {
                 val agenda = Agenda(
-                    nome = cursor.getString(cursor.getColumnIndexOrThrow("nome")),  // Nome do medicamento de tbl_Medicamento
-                    hora = cursor.getString(cursor.getColumnIndexOrThrow("hora")),  // Hora da dose de tbl_Agenda
-                    dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem"))  // Dosagem de tbl_Alerta
+                    nome = cursor.getString(cursor.getColumnIndexOrThrow("nome")),  // Nome do medicamento
+                    hora = cursor.getString(cursor.getColumnIndexOrThrow("hora")),  // Hora da dose
+                    dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem")),  // Dosagem
+                    situacaoIngestao = cursor.getInt(cursor.getColumnIndexOrThrow("situacaoIngestao")),  // Situação de ingestão
+                    dataDeIngestao = cursor.getString(cursor.getColumnIndexOrThrow("dataDeIngestao"))  // Data de ingestão
                 )
                 agendas.add(agenda)
             } while (cursor.moveToNext())
@@ -62,6 +66,8 @@ class AgendaRepository(context: Context) {
         db.close()
         return agendas
     }
+
+
 
 }
 
