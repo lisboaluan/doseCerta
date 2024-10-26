@@ -35,24 +35,26 @@ class AgendaRepository(context: Context) {
     fun obterAgendasPorData(data: String): List<Agenda> {
         val db: SQLiteDatabase = dbHelper.readableDatabase
         val query = """
-        SELECT tbl_Medicamento.nome, 
-               time(tbl_Agenda.dataHora) AS hora, 
-               tbl_Alerta.dosagem,
-               date(tbl_Agenda.dataHora) AS dataDeIngestao,
-               tbl_Agenda.situacaoIngestao  -- Campo para situação de ingestão
-        FROM tbl_Agenda
-        JOIN tbl_Alerta ON tbl_Agenda.id_alerta = tbl_Alerta.id
-        JOIN tbl_Medicamento ON tbl_Alerta.id_medicamento = tbl_Medicamento.id
-        WHERE date(tbl_Agenda.dataHora) = ?
-        AND tbl_Medicamento.id_usuario = ?
-        ORDER BY time(tbl_Agenda.dataHora) ASC
-    """
+    SELECT tbl_Alerta.id AS id_alerta,  -- Inclui o id do alerta
+           tbl_Medicamento.nome, 
+           time(tbl_Agenda.dataHora) AS hora, 
+           tbl_Alerta.dosagem,
+           date(tbl_Agenda.dataHora) AS dataDeIngestao,
+           tbl_Agenda.situacaoIngestao  -- Campo para situação de ingestão
+    FROM tbl_Agenda
+    JOIN tbl_Alerta ON tbl_Agenda.id_alerta = tbl_Alerta.id
+    JOIN tbl_Medicamento ON tbl_Alerta.id_medicamento = tbl_Medicamento.id
+    WHERE date(tbl_Agenda.dataHora) = ?
+    AND tbl_Medicamento.id_usuario = ?
+    ORDER BY time(tbl_Agenda.dataHora) ASC
+"""
         val cursor = db.rawQuery(query, arrayOf(data, SessionManager.loggedInUserId.toString()))
 
         val agendas = mutableListOf<Agenda>()
         if (cursor.moveToFirst()) {
             do {
                 val agenda = Agenda(
+                    idAlerta = cursor.getString(cursor.getColumnIndexOrThrow("id_alerta")).toInt(),
                     nome = cursor.getString(cursor.getColumnIndexOrThrow("nome")),  // Nome do medicamento
                     hora = cursor.getString(cursor.getColumnIndexOrThrow("hora")),  // Hora da dose
                     dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem")),  // Dosagem
@@ -67,7 +69,17 @@ class AgendaRepository(context: Context) {
         return agendas
     }
 
+    fun marcarComoTomado(agendaId: Int) {
+        val db: SQLiteDatabase = dbHelper.writableDatabase
+        val values = ContentValues().apply {
+            put("situacaoIngestao", 1) // Atualiza o campo para indicar que o medicamento foi tomado
+        }
 
+        val selection = "id = ?"
+        val selectionArgs = arrayOf(agendaId.toString())
 
+        db.update("tbl_Agenda", values, selection, selectionArgs)
+        db.close()
+    }
 }
 
