@@ -130,6 +130,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
                 "dataHora DATETIME NOT NULL,"  +
                 "situacaoIngestao INTEGER NOT NULL," +
                 "id_alerta INTEGER," +
+                "id_medicamento INTEGER," +
                 "id_anotacao INTEGER," +
                 "FOREIGN KEY (id_alerta) REFERENCES tbl_Alerta(id)," +
                 "FOREIGN KEY (id_anotacao) REFERENCES tbl_Anotacao(id)" +
