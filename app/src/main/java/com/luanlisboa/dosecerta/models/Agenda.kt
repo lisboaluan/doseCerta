@@ -1,6 +1,7 @@
 package com.luanlisboa.dosecerta.models
 
 data class Agenda (
+    val idAlerta: Int = -1,
     val nome: String,
     val hora: String,
     val dosagem: String,

@@ -42,7 +42,7 @@ class AlertasAdapter(private var alertas: List<Agenda>) :
         if (alertaDateTime != null) {
             when {
                 // Caso o medicamento tenha sido tomado
-                alerta.situacaoIngestao == 1 -> {
+                (alerta.situacaoIngestao == 1 && alertaDateTime.before(currentDateTime)) -> {
                     holder.statusButton.setImageResource(R.drawable.ic_status_green)
                 }
                 // Se a data e hora do alerta já passaram e o medicamento não foi tomado
