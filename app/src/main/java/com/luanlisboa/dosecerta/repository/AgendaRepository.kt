@@ -55,12 +55,13 @@ class AgendaRepository(context: Context) {
     fun obterAgendasPorData(data: String): List<Agenda> {
         val db: SQLiteDatabase = dbHelper.readableDatabase
         val query = """
-    SELECT tbl_Alerta.id AS id_alerta,  -- Inclui o id do alerta
+    SELECT tbl_Alerta.id AS id_alerta,  
            tbl_Medicamento.nome, 
            time(tbl_Agenda.dataHora) AS hora, 
            tbl_Alerta.dosagem,
            date(tbl_Agenda.dataHora) AS dataDeIngestao,
-           tbl_Agenda.situacaoIngestao  -- Campo para situação de ingestão
+           tbl_Agenda.situacaoIngestao,
+           tbl_Medicamento.id AS id_medicamento  -- Adiciona o id do medicamento
     FROM tbl_Agenda
     JOIN tbl_Alerta ON tbl_Agenda.id_alerta = tbl_Alerta.id
     JOIN tbl_Medicamento ON tbl_Alerta.id_medicamento = tbl_Medicamento.id
@@ -68,6 +69,7 @@ class AgendaRepository(context: Context) {
     AND tbl_Medicamento.id_usuario = ?
     ORDER BY time(tbl_Agenda.dataHora) ASC
 """
+
         val cursor = db.rawQuery(query, arrayOf(data, SessionManager.loggedInUserId.toString()))
 
         val agendas = mutableListOf<Agenda>()
@@ -79,7 +81,8 @@ class AgendaRepository(context: Context) {
                     hora = cursor.getString(cursor.getColumnIndexOrThrow("hora")),  // Hora da dose
                     dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem")),  // Dosagem
                     situacaoIngestao = cursor.getInt(cursor.getColumnIndexOrThrow("situacaoIngestao")),  // Situação de ingestão
-                    dataDeIngestao = cursor.getString(cursor.getColumnIndexOrThrow("dataDeIngestao"))  // Data de ingestão
+                    dataDeIngestao = cursor.getString(cursor.getColumnIndexOrThrow("dataDeIngestao")), // Data de ingestão
+                    idMedicamento = cursor.getString(cursor.getColumnIndexOrThrow("id_medicamento")).toInt()
                 )
                 agendas.add(agenda)
             } while (cursor.moveToNext())

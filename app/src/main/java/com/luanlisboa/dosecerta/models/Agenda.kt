@@ -6,5 +6,6 @@ data class Agenda (
     val hora: String,
     val dosagem: String,
     val situacaoIngestao: Int = 0,
-    val dataDeIngestao: String
+    val dataDeIngestao: String,
+    val idMedicamento: Int
 )
