@@ -58,7 +58,8 @@ class AgendaFragment : Fragment() {
     }
 
     private fun carregarAlertasDoDia(data: String) {
-        val agendas = repository.obterAgendasPorData(data)
+        // Obtém as agendas e agenda notificações
+        val agendas = repository.obterAgendasPorData(data, requireContext())
 
         if (agendas.isEmpty()) {
             binding.alertRecyclerView.visibility = View.GONE
