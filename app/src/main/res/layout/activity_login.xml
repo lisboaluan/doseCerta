@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:background="@color/white"
         android:gravity="center"
-        tools:context=".view.LoginActivity">
+        tools:context=".views.activities.LoginActivity">
 
         <!-- Imagem do logo centralizada -->
         <ImageView

@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/tratamentoFragment"
-        android:name="com.luanlisboa.dosecerta.fragments.TratamentoFragment"
+        android:name="com.luanlisboa.dosecerta.views.fragments.TratamentoFragment"
         android:label="fragment_tratamento"
         tools:layout="@layout/fragment_tratamento" />
 
     <fragment
         android:id="@+id/relatorioFragment"
-        android:name="com.luanlisboa.dosecerta.fragments.AgendaFragment"
+        android:name="com.luanlisboa.dosecerta.views.fragments.AgendaFragment"
         android:label="fragment_relatorio"
         tools:layout="@layout/fragment_agenda" />
 
     <fragment
         android:id="@+id/anotacaoFragment"
-        android:name="com.luanlisboa.dosecerta.fragments.AnotacaoFragment"
+        android:name="com.luanlisboa.dosecerta.views.fragments.AnotacaoFragment"
         android:label="fragment_anotacao"
         tools:layout="@layout/fragment_anotacao"/>
 
     <fragment
         android:id="@+id/perfilFragment"
-        android:name="com.luanlisboa.dosecerta.fragments.PerfilFragment"
+        android:name="com.luanlisboa.dosecerta.views.fragments.PerfilFragment"
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" /><action android:id="@+id/action_global_anotacaoFragment" app:destination="@id/anotacaoFragment"/>
 </navigation>

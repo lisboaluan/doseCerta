@@ -25,22 +25,22 @@
 
     <!-- Configuração das atividades e exportação -->
     <activity
-        android:name=".view.CadastroAlertaActivity"
+        android:name=".views.activities.CadastroAlertaActivity"
         android:exported="false" />
     <activity
-        android:name=".view.SignupActivity"
+        android:name=".views.activities.SignupActivity"
         android:exported="false" />
     <activity
-        android:name=".view.EditarMedicamentoActivity"
+        android:name=".views.activities.EditarMedicamentoActivity"
         android:exported="false" />
     <activity
-        android:name=".view.HomeActivity"
+        android:name=".views.activities.HomeActivity"
         android:exported="false" />
     <activity
-        android:name=".view.CadastroMedicamentoActivity"
+        android:name=".views.activities.CadastroMedicamentoActivity"
         android:exported="true" />
     <activity
-        android:name=".view.LoginActivity"
+        android:name=".views.activities.LoginActivity"
         android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -48,7 +48,7 @@
         </intent-filter>
     </activity>
     <activity
-        android:name=".view.AnotacaoActivity"
+        android:name=".views.activities.AnotacaoActivity"
         android:exported="false" />
 
 </application>

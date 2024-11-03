@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".view.AnotacaoActivity">
+    tools:context=".views.activities.AnotacaoActivity">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_voltar"
