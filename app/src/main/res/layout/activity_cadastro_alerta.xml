@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
-        tools:context=".view.CadastroMedicamentoActivity">
+        tools:context=".views.activities.CadastroMedicamentoActivity">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_voltar"
