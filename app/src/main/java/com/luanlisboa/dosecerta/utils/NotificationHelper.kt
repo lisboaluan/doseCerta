@@ -15,6 +15,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.luanlisboa.dosecerta.models.Notificacao
 import com.luanlisboa.dosecerta.repositories.AgendaRepository
+import com.luanlisboa.dosecerta.repositories.MedicamentoRepository
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -199,7 +200,8 @@ class NotificationHelper(private val context: Context) {
             // Executar marcarComoTomado somente se a ação for "ACTION_MARK_AS_TAKEN"
             if (action == "ACTION_MARK_AS_TAKEN" && horaNotificacao != null && dataNotificacao != null && idMedicamento != -1) {
                 val agendaRepository = AgendaRepository(context)
-
+                val medicamentoRepository =MedicamentoRepository(context)
+                medicamentoRepository.decrementarEstoque(idMedicamento.toLong())
                 val horaFormatada = horaNotificacao.split(":").let { partes ->
                     if (partes.size >= 2) "${partes[0]}:${partes[1]}" else horaNotificacao
                 }
