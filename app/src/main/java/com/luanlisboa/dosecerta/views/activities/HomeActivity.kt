@@ -1,6 +1,7 @@
 package com.luanlisboa.dosecerta.views.activities
 
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
@@ -25,6 +26,8 @@ class HomeActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
+        val sharedPrefs = getSharedPreferences("ScheduledNotifications", Context.MODE_PRIVATE)
+        sharedPrefs.edit().clear().apply()
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
