@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.luanlisboa.dosecerta.utils.DatabaseHelper
 import com.luanlisboa.dosecerta.models.Agenda
@@ -130,13 +131,39 @@ class AgendaRepository(context: Context) {
         return agendas
     }
 
-    fun marcarComoTomado(agendaId: Int) {
+    fun marcarComoTomado(dataHora: String, idAgenda: Int) {
         val db: SQLiteDatabase = dbHelper.writableDatabase
-        val values = ContentValues().apply {
-            put("situacaoIngestao", 1)
+
+        if (dataHora == null) {
+            return
         }
 
-        db.update("tbl_Agenda", values, "id = ?", arrayOf(agendaId.toString()))
+        // Consulta para verificar a existência de registros que correspondam ao critério
+        val query = """
+        SELECT id FROM tbl_Agenda 
+        WHERE dataHora = ? AND id_medicamento = ?
+    """
+        val cursor = db.rawQuery(
+            query,
+            arrayOf(dataHora, idAgenda.toString())
+        )
+
+        if (cursor.moveToFirst()) {
+            do {
+                val agendaId = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+
+                // Realiza o update para marcar o item como tomado
+                val values = ContentValues().apply {
+                    put("situacaoIngestao", 1)
+                }
+                db.update("tbl_Agenda", values, "id = ?", arrayOf(agendaId.toString()))
+
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
         db.close()
     }
+
+
 }
