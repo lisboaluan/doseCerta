@@ -1,6 +1,8 @@
 package com.luanlisboa.dosecerta.views.activities
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.luanlisboa.dosecerta.R
@@ -78,5 +80,28 @@ class CadastroMedicamentoActivity : AppCompatActivity() {
         binding.btnVoltar.setOnClickListener {
             finish()
         }
+
+        binding.spinnerFormato.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val formatoSelecionado = binding.spinnerFormato.selectedItem.toString()
+
+                when (formatoSelecionado) {
+                    "Cápsula(s)", "Comprimido(s)", "Drágea(s)" -> {
+                        val indexMg = resources.getStringArray(R.array.unidadeMedida).indexOf("mg")
+                        binding.spinnerUnidadeMedida.setSelection(indexMg)
+                    }
+                    "Frasco(s)" -> {
+                        val indexMl = resources.getStringArray(R.array.unidadeMedida).indexOf("ml")
+                        binding.spinnerUnidadeMedida.setSelection(indexMl)
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Não é necessário implementar
+            }
+        }
+
+
     }
 }

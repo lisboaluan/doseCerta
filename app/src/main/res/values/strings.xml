@@ -37,10 +37,10 @@
     <!-- Tela de cadastro de medicamentos-->
     <string name="hint_nomeMedicamento">Nome do Medicamento</string>
     <string name="hint_formato">Formato</string>
-    <string name="hint_unidadeMedida">Unidade de Medida</string>
+    <string name="hint_unidadeMedida">Unid. de Medida</string>
     <string name="hint_quantEstoque">Estoque</string>
     <string name="txt_cadastroMedicamento">Cadastre o seu medicamento</string>
-    <string name="txt_estoqueMedicamento">Informe a quantidade em estoque desse medicamento</string>
+    <string name="txt_estoqueMedicamento">Informe a quantidade em estoque. Opcional.</string>
 
     <!-- Tela de editar de tratamento-->
     <string name="txt_editarMedicamento">Editar tratamento\n</string>
