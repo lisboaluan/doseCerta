@@ -72,6 +72,7 @@ class MedicamentoRepository (context: Context) {
         return medicamentos
     }
 
+
     fun atualizarMedicamento(
         id: Long,
         nome: String,
@@ -102,6 +103,69 @@ class MedicamentoRepository (context: Context) {
         db.close()
         return resultado
     }
+
+    fun decrementarEstoque(id: Long): Int {
+        val db: SQLiteDatabase = dbHelper.writableDatabase
+
+        // Obtenha a quantidade atual em estoque do medicamento
+        val medicamentoCursor = db.query(
+            "tbl_Medicamento",
+            arrayOf("quantEstoque"),
+            "id = ? AND id_usuario = ?",
+            arrayOf(id.toString(), SessionManager.loggedInUserId.toString()),
+            null,
+            null,
+            null
+        )
+
+        var resultado = 0
+        var quantEstoqueAtual = 0
+        if (medicamentoCursor.moveToFirst()) {
+            quantEstoqueAtual = medicamentoCursor.getInt(medicamentoCursor.getColumnIndexOrThrow("quantEstoque"))
+        }
+        medicamentoCursor.close()
+
+        // Obtenha a dosagem na tabela tbl_Alerta
+        val alertaCursor = db.query(
+            "tbl_Alerta",
+            arrayOf("dosagem"),
+            "id_medicamento = ? AND id_usuario = ?",
+            arrayOf(id.toString(), SessionManager.loggedInUserId.toString()),
+            null,
+            null,
+            null
+        )
+
+        var dosagem = 0
+        if (alertaCursor.moveToFirst()) {
+            val dosagemText = alertaCursor.getString(alertaCursor.getColumnIndexOrThrow("dosagem"))
+
+            // Extrai apenas o número do início da string usando uma expressão regular
+            val dosagemNumberMatch = Regex("""\d+""").find(dosagemText)
+            dosagem = dosagemNumberMatch?.value?.toInt() ?: 0
+        }
+        alertaCursor.close()
+
+        // Verifica se a quantidade no estoque é suficiente para a dosagem
+        if (quantEstoqueAtual >= dosagem && dosagem > 0) {
+            val novoQuantEstoque = quantEstoqueAtual - dosagem
+            val contentValues = ContentValues().apply {
+                put("quantEstoque", novoQuantEstoque)
+            }
+
+            // Atualiza o valor no banco de dados
+            resultado = db.update(
+                "tbl_Medicamento",
+                contentValues,
+                "id = ? AND id_usuario = ?",
+                arrayOf(id.toString(), SessionManager.loggedInUserId.toString())
+            )
+        }
+
+        db.close()
+        return resultado
+    }
+
 
     fun deletarMedicamento(id: Long): Int {
         val db: SQLiteDatabase = dbHelper.writableDatabase
