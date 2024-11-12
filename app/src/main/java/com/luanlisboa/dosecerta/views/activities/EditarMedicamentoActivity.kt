@@ -5,9 +5,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.luanlisboa.dosecerta.R
+import com.luanlisboa.dosecerta.adapters.CustomSpinnerAdapter
 import com.luanlisboa.dosecerta.databinding.ActivityEditarMedicamentoBinding
 import com.luanlisboa.dosecerta.repositories.MedicamentoRepository
 import com.luanlisboa.dosecerta.utils.RouterManager
+import com.luanlisboa.dosecerta.utils.SpinnerUtils
 
 class EditarMedicamentoActivity : AppCompatActivity() {
 
@@ -24,6 +26,10 @@ class EditarMedicamentoActivity : AppCompatActivity() {
 
         medicamentoRepository = MedicamentoRepository(this)
 
+        val options = resources.getStringArray(R.array.formato)
+        val adapter = CustomSpinnerAdapter(this, options)
+        binding.spinnerFormatoEditar.adapter = adapter
+
         // Recupera o ID do medicamento enviado pela Intent
         medicamentoId = intent.getLongExtra("medicamentoId", -1).takeIf { it != -1L }
         medicamentoId?.let { carregarDadosMedicamento(it) }
@@ -37,6 +43,12 @@ class EditarMedicamentoActivity : AppCompatActivity() {
         binding.btnVoltarEditar.setOnClickListener {
             confirmarVoltar()
         }
+
+        SpinnerUtils.setupFormatoSpinnerListener(
+            binding.spinnerFormatoEditar,
+            binding.spinnerUnidadeMedidaEditar,
+            resources
+        )
     }
 
     private fun carregarDadosMedicamento(id: Long) {
