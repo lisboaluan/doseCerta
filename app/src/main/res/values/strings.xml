@@ -81,6 +81,7 @@
     <!--    Fragment Perfil-->
     <string name="txt_perfil">Aqui será a tela de perfil</string>
     <string name="txt_ola_fulano">Olá, Fulano</string>
+    <string name="relatorio">Relatório</string>
 
 
 </resources>

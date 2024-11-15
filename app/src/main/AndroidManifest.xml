@@ -16,41 +16,51 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoseCerta"
         tools:targetApi="34"
-    android:enableOnBackInvokedCallback="true">
+     android:enableOnBackInvokedCallback="true">
 
-    <!-- Receiver interno para alarmes de notificações -->
-    <receiver
-        android:name=".utils.NotificationHelper$NotificationReceiver"
-        android:exported="false" />
+        <!-- Receiver interno para alarmes de notificações -->
+        <receiver
+            android:name=".utils.NotificationHelper$NotificationReceiver"
+            android:exported="false" />
 
-    <!-- Configuração das atividades e exportação -->
-    <activity
-        android:name=".views.activities.CadastroAlertaActivity"
-        android:exported="false" />
-    <activity
-        android:name=".views.activities.SignupActivity"
-        android:exported="false" />
-    <activity
-        android:name=".views.activities.EditarMedicamentoActivity"
-        android:exported="false" />
-    <activity
-        android:name=".views.activities.HomeActivity"
-        android:exported="false" />
-    <activity
-        android:name=".views.activities.CadastroMedicamentoActivity"
-        android:exported="true" />
-    <activity
-        android:name=".views.activities.LoginActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    <activity
-        android:name=".views.activities.AnotacaoActivity"
-        android:exported="false" />
+        <!-- Configuração das atividades e exportação -->
+        <activity
+            android:name=".views.activities.CadastroAlertaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.activities.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.activities.EditarMedicamentoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.activities.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.activities.CadastroMedicamentoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".views.activities.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.activities.AnotacaoActivity"
+            android:exported="false" />
 
-</application>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.seu.pacote.app.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
-    </manifest>
+    </application>
+
+</manifest>
