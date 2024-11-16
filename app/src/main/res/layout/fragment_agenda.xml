@@ -1,8 +1,22 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/btnRelatorio"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_picture_as_pdf"
+        android:contentDescription="@string/relatorio"
+        android:layout_gravity="end"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:onClick="onExportPdf"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:tint="@color/blue"  />
 
     <!-- CalendarView para selecionar o dia -->
     <CalendarView
