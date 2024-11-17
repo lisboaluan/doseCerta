@@ -8,7 +8,6 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-    <!-- Layout principal agora é horizontal para alinhar botões à direita -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,11 +29,11 @@
                 android:text="Nome do Medicamento"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp" />
 
-            <!-- Um LinearLayout aninhado para informações adicionais -->
+            <!-- Informações adicionais do Medicamento -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -44,14 +43,44 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dosagem: 2 comprimidos"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginBottom="8dp" />
 
                 <!-- Horário do Medicamento -->
                 <TextView
                     android:id="@+id/tvMensagemAnotacao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Horário: 08:00"/>
+                    android:text="Horário: 08:00" />
+
+                <!-- Aviso de Estoque Baixo -->
+                <LinearLayout
+                    android:id="@+id/llAvisoEstoqueBaixo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:paddingTop="7dp">
+
+                    <!-- Imagem de ponto de exclamação -->
+                    <ImageView
+                        android:id="@+id/imgExclamacao"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_status_yellow"
+                        android:contentDescription="@string/estoque_baixo"
+                        android:layout_marginEnd="3dp" />
+
+                    <!-- Texto do aviso -->
+                    <TextView
+                        android:id="@+id/tvAvisoEstoqueBaixo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Aviso: Estoque baixo!"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -65,8 +94,8 @@
             <!-- Botão de editar (ícone de lápis) -->
             <ImageButton
                 android:id="@+id/btnEditar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/ic_anotacao_icon"
                 android:contentDescription="@string/editar"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -76,12 +105,12 @@
             <!-- Botão de excluir (ícone de lata de lixo) -->
             <ImageButton
                 android:id="@+id/btnExcluir"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/ic_baseline_delete_24"
                 android:contentDescription="@string/excluir"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                app:tint="@color/blue"  />
+                app:tint="@color/blue" />
         </LinearLayout>
 
     </LinearLayout>

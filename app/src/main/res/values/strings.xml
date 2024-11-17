@@ -82,6 +82,7 @@
     <string name="txt_perfil">Aqui será a tela de perfil</string>
     <string name="txt_ola_fulano">Olá, Fulano</string>
     <string name="relatorio">Relatório</string>
+    <string name="estoque_baixo">Aviso: Estoque baixo!</string>
 
 
 </resources>
