@@ -15,7 +15,7 @@ class MedicamentoRepository (context: Context) {
         formato: String,
         medida: String,
         unidMedida: String,
-        quantEstoque: Int,
+        quantEstoque: Int?,
         formatoEstoque: String?
     ): Long {
         val db: SQLiteDatabase = dbHelper.writableDatabase
@@ -61,7 +61,7 @@ class MedicamentoRepository (context: Context) {
                 medicamentos.add(
                     Medicamento(
                         id, nome, formato, medida,
-                        unidMedida.toString(), quantEstoque.toInt(), formatoEstoque
+                        unidMedida.toString(), if (quantEstoque.isNullOrEmpty()) null else quantEstoque.toInt(), formatoEstoque
                     )
                 )
             } while (cursor.moveToNext())

@@ -6,7 +6,7 @@ data class Medicamento(
     val formato: String = "-1",  // Valor padrão "-1" se não for informado
     val medida: String = "-1", // Valor padrão "-1" se não for informado
     val unidMedida: String = "-1", // Valor padrão "-1" se não for informado
-    val quantEstoque: Int = -1, // Valor padrão -1 se não for informado
+    val quantEstoque: Int? = null, // Valor padrão -1 se não for informado
     val formatoEstoque: String? = null, // Valor padrão null se não for informado
     val horarioPrimeiraDose: String? = null
 )

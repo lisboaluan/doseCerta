@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.luanlisboa.dosecerta.R
@@ -21,6 +22,7 @@ class TratamentoAdapter(
         val nomeMedicamento: TextView = view.findViewById(R.id.tvTituloAnotacao)
         val dosagem: TextView = view.findViewById(R.id.tvDosagem)
         val horario: TextView = view.findViewById(R.id.tvMensagemAnotacao)
+        val avisoEstoqueBaixo: LinearLayout = view.findViewById(R.id.llAvisoEstoqueBaixo)
         val btnEditar: ImageButton = view.findViewById(R.id.btnEditar)  // Botão de edição
         val btnExcluir: ImageButton = view.findViewById(R.id.btnExcluir)
     }
@@ -35,6 +37,14 @@ class TratamentoAdapter(
         holder.nomeMedicamento.text = tratamento.nome
         holder.dosagem.text = "Dosagem: ${tratamento.formato}"
         holder.horario.text = "Horário: ${tratamento.horarioPrimeiraDose}"
+
+        if (tratamento.quantEstoque != null) {
+            if (tratamento.quantEstoque < 3) {
+                holder.avisoEstoqueBaixo.visibility = View.VISIBLE
+            }
+        } else {
+            holder.avisoEstoqueBaixo.visibility = View.GONE
+        }
 
         // Configura o clique do botão de excluir
         holder.btnExcluir.setOnClickListener {
