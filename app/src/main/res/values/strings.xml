@@ -57,6 +57,9 @@
     <string name="txt_posologia">Posologia</string>
     <string name="txt_horario">Horário</string>
 
+    <!-- Tela de edição de medicamento e alerta-->
+    <string name="txt_edicaoCadastroMedicamento">Edite o tratamento</string>
+    <string name="txt_edicaoCadastroAlerta">Edite o cadastro de alerta</string>
 
     <!-- Fragments -->
     <string name="menu_btn_bar_tratamento">Tratamento</string>

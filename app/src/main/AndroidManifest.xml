@@ -33,7 +33,7 @@
             android:name=".views.activities.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.EditarMedicamentoActivity"
+            android:name=".views.activities.EditarTratamentoActivity"
             android:exported="false" />
         <activity
             android:name=".views.activities.HomeActivity"

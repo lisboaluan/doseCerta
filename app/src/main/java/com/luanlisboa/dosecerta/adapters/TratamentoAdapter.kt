@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.luanlisboa.dosecerta.R
 import com.luanlisboa.dosecerta.models.Medicamento
-import com.luanlisboa.dosecerta.views.activities.EditarMedicamentoActivity
+import com.luanlisboa.dosecerta.views.activities.EditarTratamentoActivity
 
 class TratamentoAdapter(
     private val tratamentos: List<Medicamento>,
@@ -61,7 +61,7 @@ class TratamentoAdapter(
         // Configura o clique do botão de editar
         holder.btnEditar.setOnClickListener {
             // Abrir a EditarMedicamentoActivity passando o ID do medicamento
-            val intent = Intent(holder.itemView.context, EditarMedicamentoActivity::class.java)
+            val intent = Intent(holder.itemView.context, EditarTratamentoActivity::class.java)
             intent.putExtra("medicamentoId", tratamento.id)  // Passa o ID do medicamento
             holder.itemView.context.startActivity(intent)
         }

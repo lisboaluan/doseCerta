@@ -3,6 +3,7 @@ package com.luanlisboa.dosecerta.repositories
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import com.luanlisboa.dosecerta.models.Alerta
 import com.luanlisboa.dosecerta.utils.DatabaseHelper
 import com.luanlisboa.dosecerta.models.Tratamento
 import com.luanlisboa.dosecerta.utils.SessionManager
@@ -52,6 +53,40 @@ class AlertaRepository(context: Context) {
         db.close()
 
         return tratamentos
+    }
+
+    // a partir daqui eu inclui sobre a edição de alerta
+
+    fun getAlertaById(id: Long): Alerta? {
+        val db = dbHelper.readableDatabase
+        val cursor = db.query("tbl_Alerta", null, "id = ?", arrayOf(id.toString()), null, null, null)
+
+        var alerta: Alerta? = null
+        if (cursor.moveToFirst()) {
+            val periodicidade = cursor.getString(cursor.getColumnIndexOrThrow("periodicidade"))
+            val horarioPrimeiraDose = cursor.getString(cursor.getColumnIndexOrThrow("horarioPrimeiraDose"))
+            val diasTratamento = cursor.getString(cursor.getColumnIndexOrThrow("diasTratamento"))
+            val dosagem = cursor.getString(cursor.getColumnIndexOrThrow("dosagem"))
+            val notificar = cursor.getInt(cursor.getColumnIndexOrThrow("notificar"))
+            alerta = Alerta(id, periodicidade, horarioPrimeiraDose, diasTratamento, dosagem, notificar)
+        }
+        cursor.close()
+        db.close()
+        return alerta
+    }
+
+    fun atualizarAlerta(id: Long, periodicidade: String, horarioPrimeiraDose: String, diasTratamento: String, dosagem: String, notificar: Int): Int {
+        val db = dbHelper.writableDatabase
+        val contentValues = ContentValues().apply {
+            put("periodicidade", periodicidade)
+            put("horarioPrimeiraDose", horarioPrimeiraDose)
+            put("diasTratamento", diasTratamento)
+            put("dosagem", dosagem)
+            put("notificar", notificar)
+        }
+        val resultado = db.update("tbl_Alerta", contentValues, "id = ?", arrayOf(id.toString()))
+        db.close()
+        return resultado
     }
 }
 

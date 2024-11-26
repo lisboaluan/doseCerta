@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_cadastroMedicamento"
+            android:text="@string/txt_edicaoCadastroMedicamento"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/dark_grey"
@@ -191,6 +191,204 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="20dp"
+            app:cardElevation="4dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_frequencia"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_horarioPrimeiraDose"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:textColor="@color/dark_grey"/>
+
+                    <TextView
+                        android:id="@+id/horarioPrimeiraDoseEditar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:00 hora(s)"
+                        android:textSize="16sp"
+                        android:textColor="@color/blue"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_periodicidade"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"/>
+
+                    <TextView
+                        android:id="@+id/periodicidadeEditar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginStart="8dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="8dp"
+                        android:text="0 hora(s)"
+                        android:gravity="right"
+                        android:textColor="@color/blue"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_duracaoTratamento"
+                        android:textSize="16sp"
+                        android:textColor="@color/dark_grey" />
+
+                    <TextView
+                        android:id="@+id/duracaoTratamentoEditar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 dia(s)"
+                        android:textSize="16sp"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:textColor="@color/blue"
+                        android:layout_marginStart="8dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_dose"
+                        android:textSize="16sp"
+                        android:textColor="@color/dark_grey"/>
+
+                    <TextView
+                        android:id="@+id/doseEditar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selecione"
+                        android:textSize="16sp"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:textColor="@color/blue"
+                        android:layout_marginStart="8dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:drawableEndCompat="@drawable/ic_arrow_drop_down" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_grey"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ativar Notificações"
+                        android:textSize="16sp"
+                        android:textColor="@color/dark_grey"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchNotificarEditar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:checked="false"
+                        app:switchMinWidth="56dp"
+                        app:switchPadding="16dp"
+                        app:thumbTint="@color/blue"
+                        app:trackTint="@color/gray"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSalvar"
             android:layout_width="match_parent"
@@ -201,8 +399,8 @@
             android:textColor="@color/white"
             android:textAlignment="textStart"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginStart="255dp"
             android:layout_marginEnd="32dp"/>
     </LinearLayout>
 </ScrollView>
-
