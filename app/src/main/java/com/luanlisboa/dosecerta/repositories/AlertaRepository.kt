@@ -75,6 +75,28 @@ class AlertaRepository(context: Context) {
         return alerta
     }
 
+    fun getAlertaIdByMedicamentoId(medicamentoId: Long): Long? {
+        val db = dbHelper.readableDatabase
+        val cursor = db.query(
+            "tbl_Alerta", // Nome da tabela de alertas
+            arrayOf("id"), // Coluna que queremos buscar
+            "id_medicamento = ?", // Condição
+            arrayOf(medicamentoId.toString()), // Parâmetros da condição
+            null,
+            null,
+            null
+        )
+
+        var alertaId: Long? = null
+        if (cursor.moveToFirst()) {
+            alertaId = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
+        }
+        cursor.close()
+        db.close()
+        return alertaId
+    }
+
+
     fun atualizarAlerta(id: Long, periodicidade: String, horarioPrimeiraDose: String, diasTratamento: String, dosagem: String, notificar: Int): Int {
         val db = dbHelper.writableDatabase
         val contentValues = ContentValues().apply {

@@ -61,7 +61,7 @@ class CadastroMedicamentoActivity : AppCompatActivity() {
                         spinnerFormato,
                         unidadeMedida,
                         spinnerUnidadeMedida,
-                        if (estoque.isEmpty()) null else estoque.toInt(),
+                        if (estoque.isEmpty()) -1 else estoque.toInt(),
                         if (spinnerEstoque != options[0]) null else spinnerEstoque
                     )
 
