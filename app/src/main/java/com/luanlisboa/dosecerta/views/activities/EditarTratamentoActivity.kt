@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.color.utilities.QuantizerCelebi
 import com.luanlisboa.dosecerta.R
 import com.luanlisboa.dosecerta.adapters.CustomSpinnerAdapter
 import com.luanlisboa.dosecerta.databinding.ActivityEditarTratamentoBinding
@@ -110,8 +111,15 @@ class EditarTratamentoActivity : AppCompatActivity() {
             binding.spinnerFormatoEditar.setSelection(formatoArray.indexOf(medicamento.formato))
             binding.editUnidadeMedidaEditar.setText(medicamento.medida)
             binding.spinnerUnidadeMedidaEditar.setSelection(unidMedidaArray.indexOf(medicamento.unidMedida))
-            binding.editEstoqueEditar.setText(medicamento.quantEstoque.toString())
-            binding.spinnerEstoqueEditar.setSelection(estoqueFormatoArray.indexOf(medicamento.formatoEstoque))
+            if(medicamento.quantEstoque == -1){
+                binding.editEstoqueEditar.setText("")
+                binding.spinnerEstoqueEditar.setSelection(0)
+                binding.editEstoqueEditar.isEnabled = false
+                binding.spinnerEstoqueEditar.isEnabled = false
+            }else{
+                binding.editEstoqueEditar.setText(medicamento.quantEstoque.toString())
+                binding.spinnerEstoqueEditar.setSelection(estoqueFormatoArray.indexOf(medicamento.formatoEstoque))
+            }
         }
     }
 

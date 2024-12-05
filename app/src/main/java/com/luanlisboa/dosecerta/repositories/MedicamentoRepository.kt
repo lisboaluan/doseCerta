@@ -15,7 +15,7 @@ class MedicamentoRepository (context: Context) {
         formato: String,
         medida: String,
         unidMedida: String,
-        quantEstoque: Int?,
+        quantEstoque: Int? = -1,
         formatoEstoque: String?
     ): Long {
         val db: SQLiteDatabase = dbHelper.writableDatabase
